@@ -8,8 +8,6 @@ Description : Singleton d'une connexion vers la base de données comptedb
 package database;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,10 +29,10 @@ public class ConnexionDB {
     private ConnexionDB() {
         try {
             getConfig();
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println("Impossibilité de se connecter à la database. Exception = " + ex.getMessage());
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Impossibilité de se connecter à la database. Exception = " + e.getMessage());
         }
     }
 
@@ -48,11 +46,11 @@ public class ConnexionDB {
     }
 
     private void getConfig() {
-        try (InputStream input = Files.newInputStream(Paths.get("identifiants.properties"))) {
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("identifiants.properties")) {
             Properties prop = new Properties();
-            prop.load(input);
+            prop.load(inputStream);
             url = prop.getProperty("database_url");
-            username = prop.getProperty("username");
+            username = prop.getProperty("user");
             password = prop.getProperty("password");
         } catch (IOException e) {
             System.out.println("Impossibilité de créer une instance ConnexionDB. Le chemin vers le fichier identifiants.properties est faux. Exception = " + e);
