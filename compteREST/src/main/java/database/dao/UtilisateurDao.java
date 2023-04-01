@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UtilisateurDao {
 
@@ -14,7 +16,8 @@ public class UtilisateurDao {
 
     /**
      * Permet de récupérer un utilisateur selon sa PK ou son nom
-     * @param pk La pk de l'utilisateur qu'on souhaite récupérer
+     *
+     * @param pk  La pk de l'utilisateur qu'on souhaite récupérer
      * @param nom Le nom de l'utilisateur qu'on souhaite récupérer
      * @return L'utilisateur
      */
@@ -40,7 +43,7 @@ public class UtilisateurDao {
                 utilisateur.setAdministrateur(result.getBoolean("administrateur"));
                 utilisateur.setBanni(result.getBoolean("banni"));
             }
-            }
+        }
         return utilisateur;
     }
 
@@ -49,22 +52,21 @@ public class UtilisateurDao {
      *
      * @return La liste de tous les utilisateurs
      */
-    /* public List<Utilisateur> getAll() throws SQLException {
+    public List<Utilisateur> getAll() throws SQLException {
         List<Utilisateur> utilisateurs = null;
-
-            ResultSet result = con.prepareStatement("SELECT * FROM t_utilisateur").executeQuery();
-            utilisateurs = new ArrayList<>();
-            while (result.next()) {
-                Utilisateur utilisateur = new Utilisateur();
-                utilisateur.setPkUtilisateur(result.getInt("pk_utilisateur"));
-                utilisateur.setNom(result.getString("nom"));
-                utilisateur.setMotDePasse(result.getString("mot_de_passe"));
-                utilisateur.setAdministrateur(result.getBoolean("administrateur"));
-                utilisateur.setBanni(result.getBoolean("banni"));
-                utilisateurs.add(utilisateur);
-            }
+        ResultSet result = con.prepareStatement("SELECT * FROM t_utilisateur").executeQuery();
+        utilisateurs = new ArrayList<>();
+        while (result.next()) {
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setPkUtilisateur(result.getInt("pk_utilisateur"));
+            utilisateur.setNom(result.getString("nom"));
+            utilisateur.setMotDePasse(result.getString("mot_de_passe"));
+            utilisateur.setAdministrateur(result.getBoolean("administrateur"));
+            utilisateur.setBanni(result.getBoolean("banni"));
+            utilisateurs.add(utilisateur);
+        }
         return utilisateurs;
-    } */
+    }
 
     /**
      * Sauvegarde un nouvel utilisateur
@@ -78,6 +80,7 @@ public class UtilisateurDao {
         statement.setString(2, utilisateur.getMotDePasse());
         statement.setBoolean(3, utilisateur.isAdministrateur());
         statement.setBoolean(4, utilisateur.isBanni());
+        statement.executeUpdate();
     }
 
     /**
@@ -94,6 +97,7 @@ public class UtilisateurDao {
         statement.setBoolean(4, utilisateur.isAdministrateur());
         statement.setBoolean(5, utilisateur.isBanni());
         statement.setInt(6, utilisateur.getPkUtilisateur());
+        statement.executeUpdate();
     }
 
     /**

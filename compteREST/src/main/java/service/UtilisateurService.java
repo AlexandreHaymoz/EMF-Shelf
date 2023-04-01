@@ -16,23 +16,60 @@ public class UtilisateurService {
     private static final Gson gson = new Gson();
     private static final UtilisateurDao utilisateurDao = new UtilisateurDao();
 
-    @Path("/{pk}")
+    /**
+     * Récupère tous les utilisateurs
+     *
+     * @return Une réponse 200 avec un message de succès si tous c'est bien passé, sinon une réponse 500 si la base de
+     * données n'arrive pas à procéder la requête.
+     */
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public String getUser(@PathParam("pk") int pk) {
+    public Response getUsers() {
         try {
-            Utilisateur utilisateur = utilisateurDao.get(pk, null);
-            if (utilisateur == null) {
-                throw new WebApplicationException(Response.Status.NOT_FOUND);
-            }
-            return gson.toJson(utilisateur);
+            return Response.status(Response.Status.OK)
+                    .entity(gson.toJson(utilisateurDao.getAll()))
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @Path("/enregistrer")
+    /**
+     * Tente de récupérer un utilisateur.
+     *
+     * @param pk La PK de l'utilisateur qu'on cherche à récupérer
+     * @return Une réponse 200 avec un message de succès si tous c'est bien passé, sinon une réponse 404 si la PK
+     * n'existe pas ou 500 si la base de données n'arrive pas à procéder la requête.
+     */
+    @Path("/{pk}")
     @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public Response getUser(@PathParam("pk") int pk) {
+        try {
+            Utilisateur utilisateur = utilisateurDao.get(pk, null);
+            if (utilisateur == null) {
+                throw new WebApplicationException(Response.Status.NOT_FOUND);
+            }
+            return Response.status(Response.Status.OK)
+                    .entity(gson.toJson(utilisateur))
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        } catch (SQLException e) {
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Tente d'enregistrer un nouvel utilisateur dans la base de donnée
+     *
+     * @param json Les informations de l'enregistrement encodées en JSON
+     * @return Une réponse 200 avec un message de succès si tous c'est bien passé, sinon une réponse 409 si le nom
+     * existe déjà ou 500 si la base de données n'arrive pas à procéder la requête.
+     */
+    @Path("/enregistrer")
+    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     public Response enregistrer(String json) {
@@ -47,34 +84,55 @@ public class UtilisateurService {
             }
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(Response.Status.OK).entity("Le visiteur a créé un compte avec succès!").build();
+        return Response.status(Response.Status.OK)
+                .entity(utilisateur.getNom() + " a été enregistré avec succès")
+                .type(MediaType.TEXT_PLAIN)
+                .build();
     }
 
+    /**
+     * Vérifie les entrées d'un utilisateur afin de savoir si les identifiants sont correctes.
+     *
+     * @param json Les informations de connection encodées en JSON
+     * @return Une réponse 200 avec un message de succès si tous c'est bien passé, sinon une réponse 401 si les
+     * identifiants sont faux ou 500 si la base de données n'arrive pas à procéder la requête.
+     */
     @Path("/connecter")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     public Response connecter(String json) {
-        Utilisateur utilisateurDTO = gson.fromJson(json, Utilisateur.class);
+        Utilisateur utilisateur = gson.fromJson(json, Utilisateur.class);
         try {
-            Utilisateur utilisateur = utilisateurDao.get(-1, utilisateurDTO.getNom());
-            if (utilisateur == null || !BCrypt.checkpw(utilisateurDTO.getMotDePasse(), utilisateur.getMotDePasse())) {
+            String motDePasse = utilisateur.getMotDePasse();
+            utilisateur = utilisateurDao.get(-1, utilisateur.getNom());
+            if (utilisateur == null || !BCrypt.checkpw(motDePasse, utilisateur.getMotDePasse())) {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(Response.Status.OK).entity("Le visiteur s'est connecté avec succès!").build();
+        return Response.status(Response.Status.OK)
+                .entity("Succès de la connexion de " + utilisateur.getNom())
+                .type(MediaType.TEXT_PLAIN)
+                .build();
     }
 
+    /**
+     * Banni ou débanni un utilisateur en inversant le champ "banni" de l'utilisateur
+     *
+     * @param json Les informations de banissement encodées en JSON
+     * @return Une réponse 200 avec un message de succès si tous c'est bien passé, sinon une réponse 404 si les
+     * informations sont introuvables ou 500 si la base de données n'arrive pas à procéder la requête.
+     */
     @Path("/bannir")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     public Response bannir(String json) {
-        Utilisateur utilisateurDTO = gson.fromJson(json, Utilisateur.class);
+        Utilisateur utilisateur = gson.fromJson(json, Utilisateur.class);
         try {
-            Utilisateur utilisateur = utilisateurDao.get(utilisateurDTO.getPkUtilisateur(), null);
+            utilisateur = utilisateurDao.get(utilisateur.getPkUtilisateur(), null);
             if (utilisateur == null) {
                 throw new WebApplicationException(Response.Status.NOT_FOUND);
             }
@@ -83,7 +141,10 @@ public class UtilisateurService {
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(Response.Status.OK).entity("L'utilisateur a été banni avec succès!").build();
+        return Response.status(Response.Status.OK)
+                .type(MediaType.TEXT_PLAIN)
+                .entity(utilisateur.getNom() + " a été " + (utilisateur.isBanni() ? "banni" : "débanni") + " avec succès")
+                .build();
     }
 
 }
