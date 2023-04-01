@@ -29,7 +29,7 @@ public class UtilisateurService {
         try {
             return Response.status(Response.Status.OK)
                     .entity(gson.toJson(utilisateurDao.getAll()))
-                    .type(MediaType.TEXT_PLAIN)
+                    .type(MediaType.APPLICATION_JSON)
                     .build();
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
@@ -54,7 +54,7 @@ public class UtilisateurService {
             }
             return Response.status(Response.Status.OK)
                     .entity(gson.toJson(utilisateur))
-                    .type(MediaType.TEXT_PLAIN)
+                    .type(MediaType.APPLICATION_JSON)
                     .build();
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
