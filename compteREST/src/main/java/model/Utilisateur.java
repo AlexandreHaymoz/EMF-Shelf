@@ -1,6 +1,8 @@
 package model;
 
-public class Utilisateur {
+import java.io.Serializable;
+
+public class Utilisateur implements Serializable {
 
     private int pkUtilisateur;
     private String nom;
