@@ -11,8 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UtilisateurDao {
-
-    private final Connection con = ConnexionDB.getInstance().getConnection();
+    private static final String DELETE = "DELETE FROM t_utilisateur WHERE ?";
+    private static final String FIND_ALL = "SELECT * FROM t_utilisateur ORDER BY pk_utilisateur";
+    private static final String FIND_BY_PK = "SELECT * FROM t_utilisateur WHERE pk_utilisateur = ?";
+    private static final String FIND_BY_NAME = "SELECT * FROM t_utilisateur WHERE nom like ?";
+    private static final String INSERT = "INSERT INTO t_utilisateur (nom, mot_de_passe, administrateur, banni) VALUES (?,?,?,?)";
+    private static final String UPDATE = "UPDATE t_utilisateur SET pk_utilisateur = ?, nom = ?, mot_de_passe = ?, administrateur = ?, banni = ? WHERE pk_utilisateur = ?";
+    private static final int DEFAULT_PK = -1;
 
     /**
      * Permet de récupérer un utilisateur selon sa PK ou son nom
@@ -23,28 +28,26 @@ public class UtilisateurDao {
      */
 
     public Utilisateur get(int pk, String nom) throws SQLException {
-        Utilisateur utilisateur = null;
-        PreparedStatement statement = null;
-
-        if (pk != -1) {
-            statement = con.prepareStatement("SELECT * FROM t_utilisateur WHERE pk_utilisateur = ?");
-            statement.setInt(1, pk);
-        } else if (nom != null) {
-            statement = con.prepareStatement("SELECT * FROM t_utilisateur WHERE nom like ?");
-            statement.setString(1, nom);
-        }
-        if (statement != null) {
-            ResultSet result = statement.executeQuery();
-            if (result.next()) {
-                utilisateur = new Utilisateur();
-                utilisateur.setPkUtilisateur(result.getInt("pk_utilisateur"));
-                utilisateur.setNom(result.getString("nom"));
-                utilisateur.setMotDePasse(result.getString("mot_de_passe"));
-                utilisateur.setAdministrateur(result.getBoolean("administrateur"));
-                utilisateur.setBanni(result.getBoolean("banni"));
+        try (Connection con = ConnexionDB.getInstance().getConnection();
+             PreparedStatement statement = (pk != DEFAULT_PK) ? con.prepareStatement(FIND_BY_PK) : con.prepareStatement(FIND_BY_NAME)) {
+            if (pk != DEFAULT_PK) {
+                statement.setInt(1, pk);
+            } else if (nom != null) {
+                statement.setString(1, nom);
+            }
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    Utilisateur utilisateur = new Utilisateur();
+                    utilisateur.setPkUtilisateur(result.getInt("pk_utilisateur"));
+                    utilisateur.setNom(result.getString("nom"));
+                    utilisateur.setMotDePasse(result.getString("mot_de_passe"));
+                    utilisateur.setAdministrateur(result.getBoolean("administrateur"));
+                    utilisateur.setBanni(result.getBoolean("banni"));
+                    return utilisateur;
+                }
             }
         }
-        return utilisateur;
+        return null;
     }
 
     /**
@@ -53,17 +56,19 @@ public class UtilisateurDao {
      * @return La liste de tous les utilisateurs
      */
     public List<Utilisateur> getAll() throws SQLException {
-        List<Utilisateur> utilisateurs = null;
-        ResultSet result = con.prepareStatement("SELECT * FROM t_utilisateur").executeQuery();
-        utilisateurs = new ArrayList<>();
-        while (result.next()) {
-            Utilisateur utilisateur = new Utilisateur();
-            utilisateur.setPkUtilisateur(result.getInt("pk_utilisateur"));
-            utilisateur.setNom(result.getString("nom"));
-            utilisateur.setMotDePasse(result.getString("mot_de_passe"));
-            utilisateur.setAdministrateur(result.getBoolean("administrateur"));
-            utilisateur.setBanni(result.getBoolean("banni"));
-            utilisateurs.add(utilisateur);
+        List<Utilisateur> utilisateurs = new ArrayList<>();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(FIND_ALL);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setPkUtilisateur(result.getInt("pk_utilisateur"));
+                utilisateur.setNom(result.getString("nom"));
+                utilisateur.setMotDePasse(result.getString("mot_de_passe"));
+                utilisateur.setAdministrateur(result.getBoolean("administrateur"));
+                utilisateur.setBanni(result.getBoolean("banni"));
+                utilisateurs.add(utilisateur);
+            }
         }
         return utilisateurs;
     }
@@ -75,12 +80,14 @@ public class UtilisateurDao {
      * @throws SQLException
      */
     public void save(Utilisateur utilisateur) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("INSERT INTO t_utilisateur (nom, mot_de_passe, administrateur, banni) VALUES (?,?,?,?)");
-        statement.setString(1, utilisateur.getNom());
-        statement.setString(2, utilisateur.getMotDePasse());
-        statement.setBoolean(3, utilisateur.isAdministrateur());
-        statement.setBoolean(4, utilisateur.isBanni());
-        statement.executeUpdate();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(INSERT)) {
+            statement.setString(1, utilisateur.getNom());
+            statement.setString(2, utilisateur.getMotDePasse());
+            statement.setBoolean(3, utilisateur.isAdministrateur());
+            statement.setBoolean(4, utilisateur.isBanni());
+            statement.executeUpdate();
+        }
     }
 
     /**
@@ -90,15 +97,18 @@ public class UtilisateurDao {
      * @throws SQLException
      */
     public void update(Utilisateur utilisateur) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("UPDATE t_utilisateur SET pk_utilisateur = ?, nom = ?, mot_de_passe = ?, administrateur = ?, banni = ? WHERE pk_utilisateur = ?");
-        statement.setInt(1, utilisateur.getPkUtilisateur());
-        statement.setString(2, utilisateur.getNom());
-        statement.setString(3, utilisateur.getMotDePasse());
-        statement.setBoolean(4, utilisateur.isAdministrateur());
-        statement.setBoolean(5, utilisateur.isBanni());
-        statement.setInt(6, utilisateur.getPkUtilisateur());
-        statement.executeUpdate();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(UPDATE)) {
+            statement.setInt(1, utilisateur.getPkUtilisateur());
+            statement.setString(2, utilisateur.getNom());
+            statement.setString(3, utilisateur.getMotDePasse());
+            statement.setBoolean(4, utilisateur.isAdministrateur());
+            statement.setBoolean(5, utilisateur.isBanni());
+            statement.setInt(6, utilisateur.getPkUtilisateur());
+            statement.executeUpdate();
+        }
     }
+
 
     /**
      * Efface un utilisateur
@@ -106,8 +116,11 @@ public class UtilisateurDao {
      * @param utilisateur L'utilisateur qu'on souhaite effacer
      * @throws SQLException
      */
-    /* public void delete(Utilisateur utilisateur) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("DELETE FROM t_utilisateur WHERE ?");
-        statement.setInt(1, utilisateur.getPkUtilisateur());
-    } */
+    public void delete(Utilisateur utilisateur) throws SQLException {
+        try (Connection con = ConnexionDB.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(DELETE)) {
+            statement.setInt(1, utilisateur.getPkUtilisateur());
+            statement.execute();
+        }
+    }
 }
