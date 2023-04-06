@@ -41,7 +41,7 @@ public class Reservations {
     public String getReservations() {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireReservations());
-        return "{\"type\":" + toJson + "}";
+        return "{\"reservations\":" + toJson + "}";
     }
 
     @GET
@@ -50,7 +50,7 @@ public class Reservations {
     public String getReservation(@PathParam("PK_reservation") int PK_reservation) {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireReservation(PK_reservation));
-        return "{\"type\":" + toJson + "}";
+        return "{\"reservations\":" + toJson + "}";
     }
 
     @POST

@@ -42,7 +42,7 @@ public class Livres {
     public String getLivres() {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireLivres());
-        return "{\"type\":" + toJson + "}";
+        return "{\"livres\":" + toJson + "}";
     }
 
     @GET
@@ -51,7 +51,7 @@ public class Livres {
     public String getLivre(@PathParam("PK_livre") int PK_livre) {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireLivre(PK_livre));
-        return "{\"type\":" + toJson + "}";
+        return "{\"livres\":" + toJson + "}";
     }
 
     @POST
