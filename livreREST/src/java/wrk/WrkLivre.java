@@ -35,11 +35,11 @@ public class WrkLivre {
                 Class.forName("com.mysql.jdbc.Driver");
                 //L'URL se compose de l'adresse de notre base de données, ainsi que
                 //la base de données à utiliser.                
-                String url = "jdbc:mysql://localhost:3306/dblivres";
+                String url = "jdbc:mysql://localhost:3306/clapassonn_EMF_Shelf";
                 //On essaie de se connecter à notre URL à partir d'un identifiant. 
                 //Ici, le nom d'utilisateur est "root", et il n'y a pas de mot de passe.
                 //Si la connexion est réussie, la méthode "getConnection" renverra "true".
-                jdbcConnection = DriverManager.getConnection(url, "root", "emf123");
+                jdbcConnection = DriverManager.getConnection(url, "clapassonn", "bu19POY[aQ}c");
                 ok = true;
             }
         } catch (SQLException b) {

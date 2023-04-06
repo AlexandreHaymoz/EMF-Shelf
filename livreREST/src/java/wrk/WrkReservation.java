@@ -4,7 +4,6 @@
  */
 package wrk;
 
-import bean.Livre;
 import bean.Reservation;
 import java.sql.Connection;
 import java.sql.Date;
@@ -37,11 +36,11 @@ public class WrkReservation {
                 Class.forName("com.mysql.jdbc.Driver");
                 //L'URL se compose de l'adresse de notre base de données, ainsi que
                 //la base de données à utiliser.                
-                String url = "jdbc:mysql://localhost:3306/dblivres";
+                String url = "jdbc:mysql://localhost:3306/clapassonn_EMF_Shelf";
                 //On essaie de se connecter à notre URL à partir d'un identifiant. 
                 //Ici, le nom d'utilisateur est "root", et il n'y a pas de mot de passe.
                 //Si la connexion est réussie, la méthode "getConnection" renverra "true".
-                jdbcConnection = DriverManager.getConnection(url, "root", "emf123");
+                jdbcConnection = DriverManager.getConnection(url, "clapassonn", "bu19POY[aQ}c");
                 ok = true;
             }
         } catch (SQLException b) {
@@ -82,7 +81,7 @@ public class WrkReservation {
                 //On essaie de créer une requête grâce à notre connexion. 
                 if ((stmt = jdbcConnection.createStatement()) != null) {
                     //Ce string est la requête SQL qui va récupérer les enregistrements.    
-                    String sql = "SELECT fk_livre, fk_compte, retour FROM dblivres.t_reservations";
+                    String sql = "SELECT * FROM t_reservations";
                     //On exécute la requête et on stocke la réponse dans un "ResulSet"
                     //Si notre "ResulSet" contient quelque chose, c'est qu'on a reçu une réponse !
                     if ((rs = stmt.executeQuery(sql)) != null) {
@@ -91,8 +90,8 @@ public class WrkReservation {
                         //s'il y a un résultat. Sinon, "false" quand il atteint
                         //un enregistrement null.
                         while (rs.next()) {
-                            int livre = rs.getInt("fk_livre");
-                            int compte = rs.getInt("fk_compte");
+                            int livre = rs.getInt("FK_livre");
+                            int compte = rs.getInt("FK_compte");
                             Date retour = rs.getDate("retour");
                             Reservation reservation = new Reservation(livre, compte, retour);
                             //On stocke notre String dans notre résultat final.
@@ -151,8 +150,8 @@ public class WrkReservation {
                         //s'il y a un résultat. Sinon, "false" quand il atteint
                         //un enregistrement null.
                         while (rs.next()) {
-                            int livre = rs.getInt("fk_livre");
-                            int compte = rs.getInt("fk_compte");
+                            int livre = rs.getInt("FK_livre");
+                            int compte = rs.getInt("FK_compte");
                             Date retour = rs.getDate("retour");
                             resultat = new Reservation(livre, compte, retour);
                         }
