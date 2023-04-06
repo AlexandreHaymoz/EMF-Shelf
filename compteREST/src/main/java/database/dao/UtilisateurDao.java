@@ -28,7 +28,7 @@ public class UtilisateurDao {
      */
 
     public Utilisateur get(int pk, String nom) throws SQLException {
-        try (Connection con = ConnexionDB.getInstance().getCon();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
              PreparedStatement statement = (pk != DEFAULT_PK) ? con.prepareStatement(FIND_BY_PK) : con.prepareStatement(FIND_BY_NAME)) {
             if (pk != DEFAULT_PK) {
                 statement.setInt(1, pk);
@@ -57,7 +57,7 @@ public class UtilisateurDao {
      */
     public List<Utilisateur> getAll() throws SQLException {
         List<Utilisateur> utilisateurs = new ArrayList<>();
-        try (Connection con = ConnexionDB.getInstance().getCon();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(FIND_ALL);
              ResultSet result = statement.executeQuery()) {
             while (result.next()) {
@@ -80,7 +80,7 @@ public class UtilisateurDao {
      * @throws SQLException
      */
     public void save(Utilisateur utilisateur) throws SQLException {
-        try (Connection con = ConnexionDB.getInstance().getCon();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(INSERT)) {
             statement.setString(1, utilisateur.getNom());
             statement.setString(2, utilisateur.getMotDePasse());
@@ -97,7 +97,7 @@ public class UtilisateurDao {
      * @throws SQLException
      */
     public void update(Utilisateur utilisateur) throws SQLException {
-        try (Connection con = ConnexionDB.getInstance().getCon();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(UPDATE)) {
             statement.setInt(1, utilisateur.getPkUtilisateur());
             statement.setString(2, utilisateur.getNom());
@@ -117,7 +117,7 @@ public class UtilisateurDao {
      * @throws SQLException
      */
     public void delete(Utilisateur utilisateur) throws SQLException {
-        try (Connection con = ConnexionDB.getInstance().getCon();
+        try (Connection con = ConnexionDB.getInstance().getConnection();
              PreparedStatement statement = con.prepareStatement(DELETE)) {
             statement.setInt(1, utilisateur.getPkUtilisateur());
             statement.execute();

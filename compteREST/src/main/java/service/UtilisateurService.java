@@ -52,7 +52,6 @@ public class UtilisateurService {
             if (utilisateur == null) {
                 throw new WebApplicationException(Response.Status.NOT_FOUND);
             }
-            utilisateur.setMotDePasse(null);
             return Response.status(Response.Status.OK)
                     .entity(gson.toJson(utilisateur))
                     .type(MediaType.APPLICATION_JSON)
