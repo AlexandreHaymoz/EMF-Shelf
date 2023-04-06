@@ -14,38 +14,41 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnexionDB {
-
     private static ConnexionDB instance;
-    private Connection connection;
-    private String url;
-    private String username;
-    private String password;
+    private static Connection connection;
+    private static String url;
+    private static String username;
+    private static String password;
 
-    /**
-     * Cette méthode permet de se connecter à la base de données
-     *
-     * @throws SQLException
-     */
+
     private ConnexionDB() {
         try {
             getConfig();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Impossibilité de se connecter à la database. Exception = " + e.getMessage());
+            Class.forName("com.mysql.cj.jdbc.driver");
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    /**
-     * Cette méthode permet de retourner l'objet Connnection de DriverManager de l'instance ConnexionDB
-     *
-     * @return L'objet Connection de DriverManager
-     */
-    public Connection getConnection() {
+    public static ConnexionDB getInstance() {
+        if (instance == null) {
+            //synchronized block to remove overhead
+            synchronized (ConnexionDB.class) {
+                if (instance == null) {
+                    instance = new ConnexionDB();
+                }
+
+            }
+        }
+        return instance;
+    }
+
+    public Connection getCon() {
         return connection;
     }
 
-    private void getConfig() {
+    private static void getConfig() {
         try (InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("identifiants.properties")) {
             Properties prop = new Properties();
             prop.load(inputStream);
@@ -54,27 +57,7 @@ public class ConnexionDB {
             password = prop.getProperty("password");
         } catch (IOException e) {
             System.out.println("Impossibilité de créer une instance ConnexionDB. Le chemin vers le fichier identifiants.properties est faux. Exception = " + e);
+            e.printStackTrace();
         }
-
     }
-
-    /**
-     * Cette méthode permet de récupérer une nouvelle instance ConnexionDB ou une précedemment créée
-     *
-     * @return L'instance ConnexionDB
-     * @throws SQLException
-     */
-    public static ConnexionDB getInstance() {
-        try {
-            if (instance == null) {
-                instance = new ConnexionDB();
-            } else if (instance.getConnection().isClosed()) {
-                instance = new ConnexionDB();
-            }
-        } catch (SQLException e) {
-            System.out.println("Impossibilité de créer une nouvelle connexion de l'instance ConnexionDB. Exception = " + e);
-        }
-        return instance;
-    }
-
 }
