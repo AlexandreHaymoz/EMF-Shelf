@@ -1,4 +1,4 @@
-package model;
+package emf.haymoz.gatewayapi.model;
 
 import java.io.Serializable;
 
