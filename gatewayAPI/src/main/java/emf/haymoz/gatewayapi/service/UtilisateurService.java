@@ -1,52 +1,64 @@
 package emf.haymoz.gatewayapi.service;
 
+import com.google.gson.Gson;
+import emf.haymoz.gatewayapi.model.Utilisateur;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+
 
 public class UtilisateurService {
 
-    private static final String URL = "http://example.com";
+    private static final String URL = "https://www.google.com/";
+    private static final Gson gson = new Gson();
 
-    public String enregistrer(String nom, String motDePasse) {
-        String data = "nom=" + URLEncoder.encode(nom, StandardCharsets.UTF_8) + "&motDePasse=" + URLEncoder.encode(motDePasse, StandardCharsets.UTF_8);
-        return httpRequest("enregistrer", data);
+    public int enregistrer(Utilisateur utilisateur) {
+        String data = gson.toJson(utilisateur);
+        return httpPost("enregistrer", data);
     }
 
-    public String login(String nom, String motDePasse) {
-        String data = "nom=" + URLEncoder.encode(nom, StandardCharsets.UTF_8) + "&motDePasse=" + URLEncoder.encode(motDePasse, StandardCharsets.UTF_8);
-        return httpRequest("login", data);
+    public int login(Utilisateur utilisateur) {
+        String data = gson.toJson(utilisateur);
+        return httpPost("login", data);
+    }
+    public void getUtilisateurs() {
+        httpGet("");
     }
 
-    private String httpRequest(String urlAppend, String data) {
-        String response = null;
+    private void httpGet(String urlAppend) {
         try {
-            URL url = new URL(URL + urlAppend);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            OutputStream os = con.getOutputStream();
+            HttpURLConnection conn = (HttpURLConnection) new URL(URL + urlAppend).openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            System.out.println(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int httpPost(String urlAppend, String data) {
+        int httpCode = 500;
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(URL + urlAppend).openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            OutputStream os = conn.getOutputStream();
             os.write(data.getBytes());
             os.flush();
             os.close();
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer content = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-            in.close();
-            con.disconnect();
-            response = content.toString();
-            System.out.println(content.toString());
+            httpCode = conn.getResponseCode();
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
-        return response;
+        return httpCode;
     }
 }
