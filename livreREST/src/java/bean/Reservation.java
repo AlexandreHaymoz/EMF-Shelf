@@ -12,10 +12,19 @@ import java.sql.Date;
  */
 public class Reservation {
 
-    public Reservation(int fk_livre, int fk_compte, Date retour) {
+    public Reservation(int pk_reservation, int fk_livre, int fk_compte, Date retour) {
+        this.pk_reservation = pk_reservation;
         this.fk_livre = fk_livre;
         this.fk_compte = fk_compte;
         this.retour = retour;
+    }
+
+    public int getPk_reservation() {
+        return pk_reservation;
+    }
+
+    public void setPk_reservation(int pk_reservation) {
+        this.pk_reservation = pk_reservation;
     }
 
     public int getFk_livre() {
@@ -42,8 +51,8 @@ public class Reservation {
         this.retour = retour;
     }
     
-    
-    
+
+    int pk_reservation;
     int fk_livre;
     int fk_compte;
     Date retour;

@@ -4,20 +4,29 @@
  */
 package bean;
 
-import com.google.gson.Gson;
-
 /**
  *
  * @author clapassonn
  */
 public class Livre {
 
-    public Livre(String titre, String auteur, String description, String image, int disponible) {
+    public Livre(int PK_Livre, String titre, String auteur, String description, String image, int disponible) {
+        this.PK_Livre = PK_Livre;
         this.titre = titre;
         this.auteur = auteur;
         this.description = description;
         this.image = image;
         this.disponible = disponible;
+    }
+
+
+
+    public int getPK_Livre() {
+        return PK_Livre;
+    }
+
+    public void setPK_Livre(int PK_Livre) {
+        this.PK_Livre = PK_Livre;
     }
 
     public String getTitre() {
@@ -60,7 +69,7 @@ public class Livre {
         this.disponible = disponible;
     }
     
-    
+    int PK_Livre;
     String titre;
     String auteur;
     String description;

@@ -1,18 +1,33 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package emf.haymoz.gatewayapi.model;
 
-import java.io.Serializable;
+/**
+ *
+ * @author clapassonn
+ */
+public class Livre {
 
-public class Livre implements Serializable {
-    public Livre() {
-
-    }
-
-    public Livre(String titre, String auteur, String description, String image, int disponible) {
+    public Livre(int PK_Livre, String titre, String auteur, String description, String image, int disponible) {
+        this.PK_Livre = PK_Livre;
         this.titre = titre;
         this.auteur = auteur;
         this.description = description;
         this.image = image;
         this.disponible = disponible;
+    }
+
+    public Livre(){
+    }
+
+    public int getPK_Livre() {
+        return PK_Livre;
+    }
+
+    public void setPK_Livre(int PK_Livre) {
+        this.PK_Livre = PK_Livre;
     }
 
     public String getTitre() {
@@ -54,10 +69,11 @@ public class Livre implements Serializable {
     public void setDisponible(int disponible) {
         this.disponible = disponible;
     }
-
-    private String titre;
-    private String auteur;
-    private String description;
-    private String image;
-    private int disponible;
+    
+    int PK_Livre;
+    String titre;
+    String auteur;
+    String description;
+    String image;
+    int disponible;
 }

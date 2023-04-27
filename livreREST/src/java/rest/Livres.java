@@ -4,9 +4,10 @@
  */
 package rest;
 
+import bean.Livre;
 import com.google.gson.Gson;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -42,7 +43,7 @@ public class Livres {
     public String getLivres() {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireLivres());
-        return "{\"livres\":" + toJson + "}";
+        return toJson;
     }
 
     @GET
@@ -51,14 +52,17 @@ public class Livres {
     public String getLivre(@PathParam("PK_livre") int PK_livre) {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireLivre(PK_livre));
-        return "{\"livres\":" + toJson + "}";
+        return toJson;
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
-    public String addLivre(@FormParam("titre") String titre, @FormParam("auteur") String auteur, @FormParam("description") String description, @FormParam("image") String image) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String addLivre(String json) {
+        Gson builder = new Gson();
+        Livre livre = builder.fromJson(json, Livre.class);
         String s;
-        if (wrk.ajouterLivre(titre, auteur, description, image)) {
+        if (wrk.ajouterLivre(livre.getTitre(), livre.getAuteur(), livre.getDescription(), livre.getImage())) {
             s = "OK";
         } else {
             s = "KO";
@@ -67,11 +71,13 @@ public class Livres {
     }
 
     @PUT
-    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
-    public String modifyLivre(@FormParam("titre") String titre, @FormParam("auteur") String auteur, @FormParam("description") String description,
-            @FormParam("image") String image, @FormParam("disponible") int disponible, @FormParam("PK_livre") int PK_livre) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String modifyLivre(String json) {
+        Gson builder = new Gson();
+        Livre livre = builder.fromJson(json, Livre.class);
         String s;
-        if (wrk.modifyLivre(titre, auteur, description, image, disponible, PK_livre)) {
+        if (wrk.modifyLivre(livre.getTitre(), livre.getAuteur(), livre.getDescription(), livre.getImage(), livre.getDisponible(), livre.getPK_Livre())) {
             s = "OK";
         } else {
             s = "KO";
@@ -80,10 +86,13 @@ public class Livres {
     }
 
     @DELETE
-    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
-    public String deleteLivre(@FormParam("PK_livre") int PK_livre) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String deleteLivre(String json) {
+        Gson builder = new Gson();
+        Livre livre = builder.fromJson(json, Livre.class);
         String s;
-        if (wrk.deleteLivre(PK_livre)) {
+        if (wrk.deleteLivre(livre.getPK_Livre())) {
             s = "OK";
         } else {
             s = "KO";

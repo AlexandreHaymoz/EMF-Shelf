@@ -90,10 +90,11 @@ public class WrkReservation {
                         //s'il y a un résultat. Sinon, "false" quand il atteint
                         //un enregistrement null.
                         while (rs.next()) {
+                            int pk_reservation = rs.getInt("PK_reservation");
                             int livre = rs.getInt("FK_livre");
                             int compte = rs.getInt("FK_compte");
                             Date retour = rs.getDate("retour");
-                            Reservation reservation = new Reservation(livre, compte, retour);
+                            Reservation reservation = new Reservation(pk_reservation,livre, compte, retour);
                             //On stocke notre String dans notre résultat final.
                             resultat.add(reservation);
                         }
@@ -150,10 +151,11 @@ public class WrkReservation {
                         //s'il y a un résultat. Sinon, "false" quand il atteint
                         //un enregistrement null.
                         while (rs.next()) {
+                            int pk_reservation = rs.getInt("PK_reservation");
                             int livre = rs.getInt("FK_livre");
                             int compte = rs.getInt("FK_compte");
                             Date retour = rs.getDate("retour");
-                            resultat = new Reservation(livre, compte, retour);
+                            resultat = new Reservation(pk_reservation,livre, compte, retour);
                         }
                     }
                     //On ferme le tout pour optimiser les performances.                    

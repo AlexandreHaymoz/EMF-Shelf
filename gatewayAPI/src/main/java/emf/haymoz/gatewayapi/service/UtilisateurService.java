@@ -9,7 +9,6 @@ import static emf.haymoz.gatewayapi.service.CommonService.httpPost;
 
 
 public class UtilisateurService {
-
     private static final String URL = "https://haymozn.emf-informatique.ch/java_compteREST/bibliotheque/utilisateurs";
     private static final Gson gson = new Gson();
 
