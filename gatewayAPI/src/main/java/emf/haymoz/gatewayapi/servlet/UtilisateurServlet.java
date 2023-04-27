@@ -1,5 +1,6 @@
 package emf.haymoz.gatewayapi.servlet;
 
+import emf.haymoz.gatewayapi.model.HttpData;
 import emf.haymoz.gatewayapi.model.Utilisateur;
 import emf.haymoz.gatewayapi.service.UtilisateurService;
 import jakarta.servlet.ServletException;
@@ -9,11 +10,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 
 @WebServlet(
         name = "UtilisateurServlet",
@@ -30,8 +32,20 @@ public class UtilisateurServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("action") == null) {
-            service.getUtilisateurs();
+        String action = req.getParameter("action");
+        if (action != null) {
+            switch (action) {
+                case "getUtilisateur" -> {
+                    String pkUtilisateur = req.getParameter("pkUtilisateur");
+                    if (pkUtilisateur != null) {
+                        sendData(service.getUtilisateur(pkUtilisateur), resp);
+                    } else {
+                        handleMauvaiseRequete(resp, "Mauvaise requête");
+                    }
+                }
+            }
+        } else {
+            sendData(service.getUtilisateurs(), resp);
         }
     }
 
@@ -77,5 +91,13 @@ public class UtilisateurServlet extends HttpServlet {
 
     private void handleEnregistrer(HttpServletResponse resp, int httpCode) {
         resp.setStatus(httpCode);
+    }
+
+    private void sendData(HttpData httpData, HttpServletResponse resp) throws IOException {
+        PrintWriter out = resp.getWriter();
+        resp.setContentType("Application/json");
+        resp.setCharacterEncoding("UTF-8");
+        out.print(httpData.data());
+        out.flush();
     }
 }

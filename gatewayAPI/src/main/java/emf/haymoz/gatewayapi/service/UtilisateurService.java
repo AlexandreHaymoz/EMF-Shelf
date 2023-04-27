@@ -1,18 +1,16 @@
 package emf.haymoz.gatewayapi.service;
 
 import com.google.gson.Gson;
+import emf.haymoz.gatewayapi.model.HttpData;
 import emf.haymoz.gatewayapi.model.Utilisateur;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import static emf.haymoz.gatewayapi.service.CommonService.httpGet;
+import static emf.haymoz.gatewayapi.service.CommonService.httpPost;
 
 
 public class UtilisateurService {
 
-    private static final String URL = "https://www.google.com/";
+    private static final String URL = "https://haymozn.emf-informatique.ch/java_compteREST/bibliotheque/utilisateurs";
     private static final Gson gson = new Gson();
 
     public int enregistrer(Utilisateur utilisateur) {
@@ -24,41 +22,15 @@ public class UtilisateurService {
         String data = gson.toJson(utilisateur);
         return httpPost("login", data);
     }
-    public void getUtilisateurs() {
-        httpGet("");
+
+    public HttpData getUtilisateurs() {
+        return httpGet("");
     }
 
-    private void httpGet(String urlAppend) {
-        try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(URL + urlAppend).openConnection();
-            conn.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            System.out.println(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public HttpData getUtilisateur(String pkUtilisateur) {
+        return httpGet("/" + pkUtilisateur);
     }
 
-    private int httpPost(String urlAppend, String data) {
-        int httpCode = 500;
-        try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(URL + urlAppend).openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            OutputStream os = conn.getOutputStream();
-            os.write(data.getBytes());
-            os.flush();
-            os.close();
-            httpCode = conn.getResponseCode();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return httpCode;
-    }
+
+
 }
