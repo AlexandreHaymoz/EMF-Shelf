@@ -28,7 +28,6 @@ hs_err_pid*
 # Private
 identifiants.*
 
-# Intellij
-*/.idea/
-*.iml
-*.iws
+# file: ~/.gitignore_global
+.DS_Store
+.idea/*
