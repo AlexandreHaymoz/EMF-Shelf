@@ -85,6 +85,20 @@ public class LivreServlet extends HttpServlet {
                         handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
                     }
                 }
+                case "modifyLivre" -> {
+                    if (body.get("PK_livre") != null && body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null && body.get("disponible") != null) {
+                        Livre livre = new Livre();
+                        livre.setPK_Livre(Integer.parseInt(body.get("PK_Livre")));
+                        livre.setTitre(body.get("titre"));
+                        livre.setAuteur(body.get("auteur"));
+                        livre.setDescription(body.get("description"));
+                        livre.setImage(body.get("image"));
+                        livre.setDisponible(Integer.parseInt(body.get("disponible")));
+                        resp.setStatus(service.modifyLivre(livre));
+                    } else {
+                        handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
+                    }
+                }
             }
         }
     }

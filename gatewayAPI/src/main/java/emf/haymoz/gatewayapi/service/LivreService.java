@@ -32,7 +32,11 @@ public class LivreService {
 
     public int addLivre(Livre livre){
         String data = gson.toJson(livre);
-        System.out.println(data);
+        return httpPost(URL , data);
+    }
+
+    public int modifyLivre(Livre livre){
+        String data = gson.toJson(livre);
         return httpPost(URL , data);
     }
 
