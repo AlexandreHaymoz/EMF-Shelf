@@ -14,22 +14,21 @@ public class UtilisateurService {
 
     public int enregistrer(Utilisateur utilisateur) {
         String data = gson.toJson(utilisateur);
-        return httpPost("enregistrer", data);
+        return httpPost(URL + "/enregistrer", data);
     }
 
     public int login(Utilisateur utilisateur) {
         String data = gson.toJson(utilisateur);
-        return httpPost("login", data);
+        return httpPost(URL + "/login", data);
     }
 
     public HttpData getUtilisateurs() {
-        return httpGet("");
+        return httpGet(URL);
     }
 
     public HttpData getUtilisateur(String pkUtilisateur) {
-        return httpGet("/" + pkUtilisateur);
+        return httpGet(URL + "/" + pkUtilisateur);
     }
-
 
 
 }
