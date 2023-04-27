@@ -89,12 +89,13 @@ public class WrkLivre {
                         //s'il y a un résultat. Sinon, "false" quand il atteint
                         //un enregistrement null.
                         while (rs.next()) {
+                            int PK_livre = rs.getInt("PK_livre");
                             String titre = rs.getString("titre");
                             String auteur = rs.getString("auteur");
                             String description = rs.getString("description");
                             String image = rs.getString("image");
                             int disponible = rs.getInt("disponible");
-                            Livre livre = new Livre(titre, auteur, description, image, disponible);
+                            Livre livre = new Livre(PK_livre,titre, auteur, description, image, disponible);
                             //On stocke notre String dans notre résultat final.
                             resultat.add(livre);
                         }
@@ -156,7 +157,7 @@ public class WrkLivre {
                             String description = rs.getString("description");
                             String image = rs.getString("image");
                             int disponible = rs.getInt("disponible");
-                            resultat = new Livre(titre, auteur, description, image, disponible);
+                            resultat = new Livre(PK_livre, titre, auteur, description, image, disponible);
                         }
                     }
                     //On ferme le tout pour optimiser les performances.                    

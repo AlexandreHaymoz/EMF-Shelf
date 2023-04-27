@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="gatewayAPI:war exploded" />
+      <artifact name="gatewayAPI:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,13 +10,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="251b6767-042a-4e19-bfeb-940d5fad428d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/gatewayAPI_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/gatewayAPI_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/ReservationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../livreREST/livreREST.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/gatewayAPI_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/gatewayAPI_war_exploded.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/model/Livre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/model/Livre.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/bean/Livre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/bean/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/src/java/bean/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/rest/Livres.java" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/src/java/rest/Livres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/rest/Reservations.java" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/src/java/rest/Reservations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkLivre.java" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkLivre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkReservation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +54,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2Ost3AIHdvioWMoHPCs8LjT435k" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -53,27 +72,41 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/3ème année/Module 133/EMF-Shelf/livreREST",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\3ème année\Module 133\EMF-Shelf\gatewayAPI\src\main\java\emf\haymoz\gatewayapi\model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="emf.haymoz.gatewayapi.service" />
+      <recent name="emf.haymoz.gatewayapi.servlet" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="gatewayAPI:war exploded">
+        <artifact name="gatewayAPI:war">
           <settings>
-            <option name="CONTEXT_PATH" value="/gatewayAPI_war_exploded" />
+            <option name="CONTEXT_PATH" value="/gatewayAPI_war" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="a02061d6-c000-459b-aadb-06e7fcddf52d" />
+        <option name="BASE_DIRECTORY_NAME" value="3ab2bd73-89fa-4115-887e-43b1667b8e47" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -81,9 +114,39 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="14676" />
+        <option name="DEBUG_PORT" value="55630" />
       </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
@@ -116,7 +179,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="gatewayAPI:war exploded" />
+          <artifact name="gatewayAPI:war" />
         </option>
       </method>
     </configuration>
@@ -131,6 +194,7 @@
       <updated>1682360915347</updated>
       <workItem from="1682360916605" duration="2506000" />
       <workItem from="1682528972608" duration="10543000" />
+      <workItem from="1682592823005" duration="8101000" />
     </task>
     <servers />
   </component>

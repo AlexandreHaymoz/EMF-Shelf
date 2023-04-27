@@ -2,35 +2,27 @@ package emf.haymoz.gatewayapi.service;
 
 import com.google.gson.Gson;
 
-import emf.haymoz.gatewayapi.model.Livre;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LivreService {
+public class ReservationService {
     // URL du Rest
-    private static final String URL = "http://clapassonn.emf-informatique.ch/javaLivreREST/bibliotheque/livres";
+    private static final String URL = "http://clapassonn.emf-informatique.ch/javaLivreREST/bibliotheque/reservations";
 
     // Pour serialiser des objets Java en JSON
     private static final Gson gson = new Gson();
 
 
-    public String getLivres() {
+    public String getReservations() {
         return httpGet("");
     }
 
-    public String getLivre(String pk) {
+    public String getReservation(String pk) {
         return httpGet("/" + pk);
     }
-
-    public int addLivre(Livre livre){
-        String data = gson.toJson(livre);
-        System.out.println(data);
-        return httpPost("", data);
-    }
-
     /**
      * Envoie une requête GET vers une adresse cible et retourne les données.
      *

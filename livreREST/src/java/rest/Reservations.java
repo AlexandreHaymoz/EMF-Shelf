@@ -4,12 +4,12 @@
  */
 package rest;
 
+import bean.Reservation;
 import com.google.gson.Gson;
-import java.sql.Date;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,17 +31,19 @@ public class Reservations {
     private UriInfo context;
 
     WrkReservation wrk = new WrkReservation();
+
     /**
      * Creates a new instance of Reservations
      */
     public Reservations() {
     }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getReservations() {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireReservations());
-        return "{\"reservations\":" + toJson + "}";
+        return toJson;
     }
 
     @GET
@@ -50,14 +52,17 @@ public class Reservations {
     public String getReservation(@PathParam("PK_reservation") int PK_reservation) {
         Gson builder = new Gson();
         String toJson = builder.toJson(wrk.lireReservation(PK_reservation));
-        return "{\"reservations\":" + toJson + "}";
+        return toJson;
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
-    public String addReservation(@FormParam("FK_livre") int FK_livre, @FormParam("FK_compte") int FK_compte, @FormParam("retour") Date retour) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String addReservation(String json) {
+        Gson builder = new Gson();
+        Reservation reservation = builder.fromJson(json, Reservation.class);
         String s;
-        if (wrk.ajouterReservation(FK_livre, FK_compte, retour)) {
+        if (wrk.ajouterReservation(reservation.getFk_livre(), reservation.getFk_compte(), reservation.getRetour())) {
             s = "OK";
         } else {
             s = "KO";
@@ -66,10 +71,13 @@ public class Reservations {
     }
 
     @PUT
-    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
-    public String modifyReservation(@FormParam("FK_livre") int FK_livre, @FormParam("FK_compte") int FK_compte, @FormParam("retour") Date retour, @FormParam("PK_reservation") int PK_reservation) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String modifyReservation(String json) {
+        Gson builder = new Gson();
+        Reservation reservation = builder.fromJson(json, Reservation.class);
         String s;
-        if (wrk.modifyReservation(FK_livre, FK_compte, retour, PK_reservation)) {
+        if (wrk.modifyReservation(reservation.getFk_livre(), reservation.getFk_compte(), reservation.getRetour(), reservation.getPk_reservation())) {
             s = "OK";
         } else {
             s = "KO";
@@ -78,10 +86,13 @@ public class Reservations {
     }
 
     @DELETE
-    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
-    public String deleteReservation(@FormParam("PK_reservation") int PK_reservation) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String deleteReservation(String json) {
+        Gson builder = new Gson();
+        Reservation reservation = builder.fromJson(json, Reservation.class);
         String s;
-        if (wrk.deleteReservation(PK_reservation)) {
+        if (wrk.deleteReservation(reservation.getPk_reservation())) {
             s = "OK";
         } else {
             s = "KO";

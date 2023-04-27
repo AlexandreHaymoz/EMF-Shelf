@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class UtilisateurService {
 
-    private static final String URL = "https://www.google.com/";
+    private static final String URL = "http://haymozn.emf-informatique.ch/java_compteREST/bibliotheque/utilisateurs";
     private static final Gson gson = new Gson();
 
     public int enregistrer(Utilisateur utilisateur) {
