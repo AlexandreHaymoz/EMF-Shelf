@@ -1,5 +1,6 @@
 package emf.haymoz.gatewayapi.servlet;
 
+import com.google.gson.Gson;
 import emf.haymoz.gatewayapi.model.HttpData;
 import emf.haymoz.gatewayapi.model.Utilisateur;
 import emf.haymoz.gatewayapi.service.UtilisateurService;
@@ -24,7 +25,8 @@ import java.util.Map;
         urlPatterns = {"/utilisateurs"}
 )
 public class UtilisateurServlet extends HttpServlet {
-    UtilisateurService service;
+    private UtilisateurService service;
+    private static final Gson gson = new Gson();
 
     @Override
     public void init() throws ServletException {
@@ -66,7 +68,7 @@ public class UtilisateurServlet extends HttpServlet {
                 utilisateur.setMotDePasse(body.get("motDePasse"));
                 switch (action) {
                     case "enregistrer" -> handleEnregistrer(resp, service.enregistrer(utilisateur));
-                    case "connecter" -> handleConnecter(req, resp, service.login(utilisateur));
+                    case "connecter" -> handleConnecter(req, resp, service.connecter(utilisateur));
                     default -> handleMauvaiseRequete(resp, "Action inconnue");
                 }
             } else {
@@ -81,13 +83,13 @@ public class UtilisateurServlet extends HttpServlet {
         resp.getWriter().write(message);
     }
 
-    private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, HttpData httpCode) {
+    private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, HttpData httpCode) throws IOException {
         if (httpCode.httpCode() == HttpURLConnection.HTTP_OK) {
             HttpSession session = req.getSession();
-            // Continue...
-        } else {
-            resp.setStatus(httpCode.httpCode());
+            Utilisateur utilisateur = gson.fromJson(httpCode.data(), Utilisateur.class);
+            session.setAttribute("utilisateur", utilisateur);
         }
+        resp.setStatus(httpCode.httpCode());
     }
 
     private void handleEnregistrer(HttpServletResponse resp, HttpData httpCode) {

@@ -16,9 +16,9 @@ public class UtilisateurService {
         return httpRequest(URL + "/enregistrer", data, "POST");
     }
 
-    public HttpData login(Utilisateur utilisateur) {
+    public HttpData connecter(Utilisateur utilisateur) {
         String data = gson.toJson(utilisateur);
-        return httpRequest(URL + "/login", data, "POST");
+        return httpRequest(URL + "/connecter", data, "POST");
     }
 
     public HttpData getUtilisateurs() {

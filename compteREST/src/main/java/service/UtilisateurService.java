@@ -27,10 +27,7 @@ public class UtilisateurService {
     @GET
     public Response getUsers() {
         try {
-            return Response.status(Response.Status.OK)
-                    .entity(gson.toJson(utilisateurDao.getAll()))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
+            return Response.status(Response.Status.OK).entity(gson.toJson(utilisateurDao.getAll())).type(MediaType.APPLICATION_JSON).build();
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -52,10 +49,7 @@ public class UtilisateurService {
             if (utilisateur == null) {
                 throw new WebApplicationException(Response.Status.NOT_FOUND);
             }
-            return Response.status(Response.Status.OK)
-                    .entity(gson.toJson(utilisateur))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
+            return Response.status(Response.Status.OK).entity(gson.toJson(utilisateur)).type(MediaType.APPLICATION_JSON).build();
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -84,10 +78,7 @@ public class UtilisateurService {
             }
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(Response.Status.OK)
-                .entity(utilisateur.getNom() + " a été enregistré avec succès")
-                .type(MediaType.TEXT_PLAIN)
-                .build();
+        return Response.status(Response.Status.OK).entity(utilisateur.getNom() + " a été enregistré avec succès").type(MediaType.TEXT_PLAIN).build();
     }
 
     /**
@@ -98,7 +89,7 @@ public class UtilisateurService {
      * identifiants sont faux ou 500 si la base de données n'arrive pas à procéder la requête.
      */
     @Path("/connecter")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     public Response connecter(String json) {
@@ -112,10 +103,7 @@ public class UtilisateurService {
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(Response.Status.OK)
-                .entity("Succès de la connexion de " + utilisateur.getNom())
-                .type(MediaType.TEXT_PLAIN)
-                .build();
+        return Response.status(Response.Status.OK).entity(gson.toJson(utilisateur)).type(MediaType.APPLICATION_JSON).build();
     }
 
     /**
@@ -128,7 +116,7 @@ public class UtilisateurService {
     @Path("/bannir")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    @POST
+    @PUT
     public Response bannir(String json) {
         Utilisateur utilisateur = gson.fromJson(json, Utilisateur.class);
         try {
@@ -141,10 +129,7 @@ public class UtilisateurService {
         } catch (SQLException e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(Response.Status.OK)
-                .type(MediaType.TEXT_PLAIN)
-                .entity(utilisateur.getNom() + " a été " + (utilisateur.isBanni() ? "banni" : "débanni") + " avec succès")
-                .build();
+        return Response.status(Response.Status.OK).type(MediaType.TEXT_PLAIN).entity(utilisateur.getNom() + " a été " + (utilisateur.isBanni() ? "banni" : "débanni") + " avec succès").build();
     }
 
 }

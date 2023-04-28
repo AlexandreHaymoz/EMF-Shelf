@@ -10,14 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../compteREST/src/main/java/service/UtilisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../compteREST/src/main/java/service/UtilisateurService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/build-impl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/genfiles.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,22 +35,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/133 - HAY/EMF-Shelf/compteREST",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Tomcat 8.5.751" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.751" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="gatewayAPI:war">
@@ -64,7 +61,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="c751feb7-1863-4cd2-9312-136191dd33df" />
+        <option name="BASE_DIRECTORY_NAME" value="8054a59f-39ca-496c-b848-3aa153e309e4" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -72,7 +69,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="55234" />
+        <option name="DEBUG_PORT" value="51527" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -153,10 +150,22 @@
       <workItem from="1682603220472" duration="483000" />
       <workItem from="1682605866826" duration="540000" />
       <workItem from="1682672227603" duration="135000" />
+      <workItem from="1682679615882" duration="3606000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/CommonService.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
