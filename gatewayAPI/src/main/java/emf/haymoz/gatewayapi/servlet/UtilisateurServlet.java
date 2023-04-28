@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,14 +39,14 @@ public class UtilisateurServlet extends HttpServlet {
                 case "getUtilisateur" -> {
                     String pkUtilisateur = req.getParameter("pkUtilisateur");
                     if (pkUtilisateur != null) {
-                        sendData(service.getUtilisateur(pkUtilisateur), resp);
+                        sendData(resp, service.getUtilisateur(pkUtilisateur));
                     } else {
                         handleMauvaiseRequete(resp, "Mauvaise requête");
                     }
                 }
             }
         } else {
-            sendData(service.getUtilisateurs(), resp);
+            sendData(resp, service.getUtilisateurs());
         }
     }
 
@@ -80,20 +81,20 @@ public class UtilisateurServlet extends HttpServlet {
         resp.getWriter().write(message);
     }
 
-    private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, int httpCode) {
-        if (httpCode == 200) {
+    private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, HttpData httpCode) {
+        if (httpCode.httpCode() == HttpURLConnection.HTTP_OK) {
             HttpSession session = req.getSession();
             // Continue...
         } else {
-            resp.setStatus(httpCode);
+            resp.setStatus(httpCode.httpCode());
         }
     }
 
-    private void handleEnregistrer(HttpServletResponse resp, int httpCode) {
-        resp.setStatus(httpCode);
+    private void handleEnregistrer(HttpServletResponse resp, HttpData httpCode) {
+        resp.setStatus(httpCode.httpCode());
     }
 
-    private void sendData(HttpData httpData, HttpServletResponse resp) throws IOException {
+    private void sendData(HttpServletResponse resp, HttpData httpData) throws IOException {
         PrintWriter out = resp.getWriter();
         resp.setContentType("Application/json");
         resp.setCharacterEncoding("UTF-8");
