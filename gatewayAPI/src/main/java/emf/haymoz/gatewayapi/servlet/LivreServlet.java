@@ -80,7 +80,7 @@ public class LivreServlet extends HttpServlet {
                         livre.setAuteur(body.get("auteur"));
                         livre.setDescription(body.get("description"));
                         livre.setImage(body.get("image"));
-                        resp.setStatus(service.addLivre(livre));
+                        resp.setStatus(service.addLivre(livre).httpCode());
                     } else {
                         handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
                     }
@@ -94,7 +94,7 @@ public class LivreServlet extends HttpServlet {
                         livre.setDescription(body.get("description"));
                         livre.setImage(body.get("image"));
                         livre.setDisponible(Integer.parseInt(body.get("disponible")));
-                        resp.setStatus(service.modifyLivre(livre));
+                        resp.setStatus(service.modifyLivre(livre).httpCode());
                     } else {
                         handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
                     }

@@ -22,21 +22,21 @@ public class LivreService {
 
 
     public HttpData getLivres() {
-        return httpGet(URL);
+        return httpRequest(URL, null, "GET");
     }
 
     public HttpData getLivre(String pk) {
-        return httpGet(URL + "/" + pk);
+        return httpRequest(URL + "/" + pk, null, "GET");
     }
 
-    public int addLivre(Livre livre){
+    public HttpData addLivre(Livre livre){
         String data = gson.toJson(livre);
-        return httpPostPutDelete(URL , data, "POST");
+        return httpRequest(URL , data, "POST");
     }
 
-    public int modifyLivre(Livre livre){
+    public HttpData modifyLivre(Livre livre){
         String data = gson.toJson(livre);
-        return httpPostPutDelete(URL , data, "PUT");
+        return httpRequest(URL , data, "PUT");
     }
 
     /**
