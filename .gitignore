@@ -31,3 +31,5 @@ identifiants.*
 # file: ~/.gitignore_global
 .DS_Store
 .idea/
+/livreREST/build/
+/livreREST/dist/

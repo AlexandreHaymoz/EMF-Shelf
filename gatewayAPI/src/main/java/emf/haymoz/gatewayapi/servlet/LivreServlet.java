@@ -39,12 +39,12 @@ public class LivreServlet extends HttpServlet {
         if (action != null) {
             switch (action) {
                 case "getLivres" -> {
-                         httpData = service.getLivres();
+                    httpData = service.getLivres();
                 }
                 case "getLivre" -> {
                     String pk = req.getParameter("pk");
                     if (pk != null) {
-                         httpData = service.getLivre(pk);
+                        httpData = service.getLivre(pk);
                     }
                 }
 
@@ -69,40 +69,60 @@ public class LivreServlet extends HttpServlet {
                     .filter(pair -> pair.length == 2)
                     .forEach(pair -> body.put(pair[0], pair[1]));
         }
-        String action = body.get("action");
-
-        if (action != null) {
-            switch (action) {
-                case "addLivre" -> {
-                    if (body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null) {
-                        Livre livre = new Livre();
-                        livre.setTitre(body.get("titre"));
-                        livre.setAuteur(body.get("auteur"));
-                        livre.setDescription(body.get("description"));
-                        livre.setImage(body.get("image"));
-                        resp.setStatus(service.addLivre(livre).httpCode());
-                    } else {
-                        handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
-                    }
-                }
-                case "modifyLivre" -> {
-                    if (body.get("PK_livre") != null && body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null && body.get("disponible") != null) {
-                        Livre livre = new Livre();
-                        livre.setPK_Livre(Integer.parseInt(body.get("PK_Livre")));
-                        livre.setTitre(body.get("titre"));
-                        livre.setAuteur(body.get("auteur"));
-                        livre.setDescription(body.get("description"));
-                        livre.setImage(body.get("image"));
-                        livre.setDisponible(Integer.parseInt(body.get("disponible")));
-                        resp.setStatus(service.modifyLivre(livre).httpCode());
-                    } else {
-                        handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
-                    }
-                }
-            }
+        if (body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null) {
+            Livre livre = new Livre();
+            livre.setTitre(body.get("titre"));
+            livre.setAuteur(body.get("auteur"));
+            livre.setDescription(body.get("description"));
+            livre.setImage(body.get("image"));
+            resp.setStatus(service.addLivre(livre).httpCode());
+        } else {
+            handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
         }
     }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, String> body = new HashMap<>();
+        String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
+        if (requestBody != null) {
+            Arrays.stream(requestBody.split("&"))
+                    .map(line -> line.split("="))
+                    .filter(pair -> pair.length == 2)
+                    .forEach(pair -> body.put(pair[0], pair[1]));
+        }
+        if (body.get("PK_livre") != null && body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null && body.get("disponible") != null) {
+            Livre livre = new Livre();
+            livre.setPK_Livre(Integer.parseInt(body.get("PK_Livre")));
+            livre.setTitre(body.get("titre"));
+            livre.setAuteur(body.get("auteur"));
+            livre.setDescription(body.get("description"));
+            livre.setImage(body.get("image"));
+            livre.setDisponible(Integer.parseInt(body.get("disponible")));
+            resp.setStatus(service.modifyLivre(livre).httpCode());
+        } else {
+            handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, String> body = new HashMap<>();
+        String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
+        if (requestBody != null) {
+            Arrays.stream(requestBody.split("&"))
+                    .map(line -> line.split("="))
+                    .filter(pair -> pair.length == 2)
+                    .forEach(pair -> body.put(pair[0], pair[1]));
+        }
+        if (body.get("PK_livre") != null ) {
+            Livre livre = new Livre();
+            livre.setPK_Livre(Integer.parseInt(body.get("PK_Livre")));
+            resp.setStatus(service.deleteLivre(livre).httpCode());
+        } else {
+            handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
+        }
+    }
 
     private void handleMauvaiseRequete(HttpServletResponse resp, String message) throws IOException {
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);

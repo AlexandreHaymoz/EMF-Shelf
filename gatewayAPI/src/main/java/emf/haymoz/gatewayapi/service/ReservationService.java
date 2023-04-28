@@ -1,12 +1,17 @@
 package emf.haymoz.gatewayapi.service;
 
 import com.google.gson.Gson;
+import emf.haymoz.gatewayapi.model.HttpData;
+import emf.haymoz.gatewayapi.model.Livre;
+import emf.haymoz.gatewayapi.model.Reservation;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import static emf.haymoz.gatewayapi.service.CommonService.httpRequest;
 
 public class ReservationService {
     // URL du Rest
@@ -16,59 +21,27 @@ public class ReservationService {
     private static final Gson gson = new Gson();
 
 
-    public String getReservations() {
-        return httpGet("");
+    public HttpData getReservations() {
+        return httpRequest(URL, null, "GET");
     }
 
-    public String getReservation(String pk) {
-        return httpGet("/" + pk);
-    }
-    /**
-     * Envoie une requête GET vers une adresse cible et retourne les données.
-     *
-     * @param urlAppend Un string qui spécifie l'adresse cible
-     * @return A VOIR, SUREMENT UN STRING AVEC LES DONNEES
-     */
-    private String httpGet(String urlAppend) {
-        try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(URL + urlAppend).openConnection();
-            conn.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            System.out.println(response);
-            return response.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+    public HttpData getReservation(String pk) {
+        return httpRequest(URL + "/" + pk, null, "GET");
     }
 
-    /**
-     * Envoie une requête POST vers une adresse cible et retourne un code HTTP.
-     *
-     * @param urlAppend Un string qui spécifie l'adresse cible
-     * @param data      Le payload de la requête POST
-     * @return un code HTTP selon le résultat de la requête POST
-     */
-    private int httpPost(String urlAppend, String data) {
-        int httpCode = 500;
-        try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(URL + urlAppend).openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            OutputStream os = conn.getOutputStream();
-            os.write(data.getBytes());
-            os.flush();
-            os.close();
-            httpCode = conn.getResponseCode();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return httpCode;
+    public HttpData addReservation(Reservation reservation){
+        String data = gson.toJson(reservation);
+        return httpRequest(URL , data, "POST");
     }
+
+    public HttpData modifyReservation(Reservation reservation){
+        String data = gson.toJson(reservation);
+        return httpRequest(URL , data, "PUT");
+    }
+
+    public HttpData deleteReservation(Reservation reservation){
+        String data = gson.toJson(reservation);
+        return httpRequest(URL , data, "DELETE");
+    }
+
 }

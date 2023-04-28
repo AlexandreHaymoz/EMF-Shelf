@@ -39,11 +39,10 @@ public class LivreService {
         return httpRequest(URL , data, "PUT");
     }
 
-    /**
-     * Envoie une requête GET vers une adresse cible et retourne les données.
-     *
-     * @param urlAppend Un string qui spécifie l'adresse cible
-     * @return A VOIR, SUREMENT UN STRING AVEC LES DONNEES
-     */
+    public HttpData deleteLivre(Livre livre){
+        String data = gson.toJson(livre);
+        return httpRequest(URL , data, "DELETE");
+    }
+
 
 }
