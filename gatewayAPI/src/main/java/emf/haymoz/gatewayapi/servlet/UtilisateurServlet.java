@@ -27,6 +27,8 @@ import java.util.Map;
 public class UtilisateurServlet extends HttpServlet {
     private UtilisateurService service;
     private static final Gson gson = new Gson();
+    private static final String REGEX_NOM = "^[a-zA-Z]{3,18}$";
+    private static final String REGEX_MOTDEPASSE = "(?=^.{8,18}$)((?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=(.*\\d){1,}))((?!.*[\",;&|'])|(?=(.*\\W){1,}))(?!.*[\",;&|'])^.*$";
 
     @Override
     public void init() throws ServletException {
@@ -43,7 +45,7 @@ public class UtilisateurServlet extends HttpServlet {
                     if (pkUtilisateur != null) {
                         sendData(resp, service.getUtilisateur(pkUtilisateur));
                     } else {
-                        handleMauvaiseRequete(resp, "Mauvaise requête");
+                        handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête");
                     }
                 }
             }
@@ -67,33 +69,60 @@ public class UtilisateurServlet extends HttpServlet {
                 utilisateur.setNom(body.get("nom"));
                 utilisateur.setMotDePasse(body.get("motDePasse"));
                 switch (action) {
-                    case "enregistrer" -> handleEnregistrer(resp, service.enregistrer(utilisateur));
-                    case "connecter" -> handleConnecter(req, resp, service.connecter(utilisateur));
-                    default -> handleMauvaiseRequete(resp, "Action inconnue");
+                    case "enregistrer" -> handleEnregistrer(req, resp, utilisateur);
+                    case "connecter" -> handleConnecter(req, resp, utilisateur);
+                    case "nathan" -> {
+                        if (req.getSession().getAttribute("utilisateur") != null) {
+                            resp.getWriter().write("NATHAN!");
+                        } else {
+                            resp.getWriter().write("FABIEN!");
+                        }
+                    }
+                    default -> handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Action inconnue");
                 }
             } else {
-                handleMauvaiseRequete(resp, "Mauvaise requête");
+                handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête");
             }
 
         }
     }
 
-    private void handleMauvaiseRequete(HttpServletResponse resp, String message) throws IOException {
-        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    private void handleMauvaiseRequete(HttpServletResponse resp, int httpCode, String message) throws IOException {
+        resp.setStatus(httpCode);
         resp.getWriter().write(message);
     }
 
-    private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, HttpData httpCode) throws IOException {
-        if (httpCode.httpCode() == HttpURLConnection.HTTP_OK) {
-            HttpSession session = req.getSession();
-            Utilisateur utilisateur = gson.fromJson(httpCode.data(), Utilisateur.class);
-            session.setAttribute("utilisateur", utilisateur);
+    private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, Utilisateur utilisateur) throws IOException {
+        if (req.getSession().getAttribute("utilisateur") == null) {
+            HttpData httpCode = service.connecter(utilisateur);
+            if (httpCode.httpCode() == HttpURLConnection.HTTP_OK) {
+                HttpSession session = req.getSession();
+                utilisateur = gson.fromJson(httpCode.data(), Utilisateur.class);
+                session.setAttribute("utilisateur", utilisateur);
+            }
+            resp.setStatus(httpCode.httpCode());
+        } else {
+            handleMauvaiseRequete(resp, HttpURLConnection.HTTP_FORBIDDEN, "Vous êtes déjà connecté");
         }
-        resp.setStatus(httpCode.httpCode());
+
     }
 
-    private void handleEnregistrer(HttpServletResponse resp, HttpData httpCode) {
-        resp.setStatus(httpCode.httpCode());
+    private void handleEnregistrer(HttpServletRequest req, HttpServletResponse resp, Utilisateur utilisateur) throws IOException {
+        if (req.getSession().getAttribute("utilisateur") == null) {
+            if (utilisateur.getNom() != null && utilisateur.getNom().matches(REGEX_NOM)) {
+                if (utilisateur.getMotDePasse() != null && utilisateur.getMotDePasse().matches(REGEX_MOTDEPASSE)) {
+                    HttpData httpCode = service.enregistrer(utilisateur);
+                    resp.setStatus(httpCode.httpCode());
+                } else {
+                    handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Le mot de passe doit comporter au moins 8 caractères et au maximum 18 caractères, dont au moins une lettre majuscule, au moins une lettre minuscule et au moins un chiffre. Les caractères spéciaux \",;&|' ne sont pas autorisés.");
+                }
+            } else {
+                handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Le nom doit comporter au moins 8 à 18 caractères sans casse de A à Z uniquement");
+            }
+        } else {
+            handleMauvaiseRequete(resp, HttpURLConnection.HTTP_FORBIDDEN, "Vous êtes déjà connecté");
+        }
+
     }
 
     private void sendData(HttpServletResponse resp, HttpData httpData) throws IOException {
