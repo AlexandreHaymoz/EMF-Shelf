@@ -1,8 +1,8 @@
 package emf.haymoz.gatewayapi.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Reservation implements Serializable {
 
@@ -10,7 +10,7 @@ public class Reservation implements Serializable {
 
     }
 
-    public Reservation(int pk_reservation, int fk_livre, int fk_compte, LocalDate retour) {
+    public Reservation(int pk_reservation, int fk_livre, int fk_compte, Date retour) {
         this.pk_reservation = pk_reservation;
         this.fk_livre = fk_livre;
         this.fk_compte = fk_compte;
@@ -40,17 +40,17 @@ public class Reservation implements Serializable {
         this.fk_compte = fk_compte;
     }
 
-    public LocalDate getRetour() {
+    public Date getRetour() {
         return retour;
     }
 
-    public void setRetour(LocalDate retour) {
+    public void setRetour(Date retour) {
         this.retour = retour;
     }
 
     private int pk_reservation;
     private int fk_livre;
     private int fk_compte;
-    private LocalDate retour;
+    private Date retour;
 
 }

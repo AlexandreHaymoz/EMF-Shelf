@@ -10,75 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/model/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/ReservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/libraries/jakarta_ws_rs_api_2_1_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/libraries/jakarta_ws_rs_api_2_1_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/libraries/javaee_endorsed_api_7_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/libraries/javaee_endorsed_api_7_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/libraries/lib1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/libraries/lib1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/libraries/org_netbeans_modules_java_j2seproject_copylibstask.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/libraries/org_netbeans_modules_java_j2seproject_copylibstask.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/libraries/restlib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/libraries/restlib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/build.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/build/web/META-INF/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/build/web/META-INF/context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/build/web/css_master-all.css" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/build/web/css_master-all.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/build/web/test-resbeans.css" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/build/web/test-resbeans.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/build/web/test-resbeans.html" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/build/web/test-resbeans.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/lib/nblibraries.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/livreREST.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/livreREST.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/ant-deploy.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/build-impl.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/genfiles.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/private/private.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/project.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/rest-build.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/conf/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/bean/Livre.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/bean/Reservation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/rest/ApplicationConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/rest/Livres.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/rest/Reservations.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkLivre.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkReservation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/META-INF/context.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/app.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/cc.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/cg.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/collapse.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/css_master-all.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/expand.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/background_border_bottom.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/bg_gradient.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/level1_deselect.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/level1_selected-1lvl.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/masthead.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/masthead_link_enabled.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/masthead_link_roll.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/pbdis.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/pbena.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/pbmou.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/pbsel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/pname.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/primary-enabled.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/primary-roll.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/secondary-enabled.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/tbsel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/images/tbuns.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/item.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/og.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/test-resbeans.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/test-resbeans.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/test-resbeans.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +151,7 @@
       <workItem from="1682605866826" duration="540000" />
       <workItem from="1682672227603" duration="135000" />
       <workItem from="1682679615882" duration="3606000" />
-      <workItem from="1682688326619" duration="980000" />
+      <workItem from="1682688326619" duration="1707000" />
     </task>
     <servers />
   </component>

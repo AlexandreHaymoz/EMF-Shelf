@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -76,13 +77,52 @@ public class ReservationServlet extends HttpServlet {
             Reservation reservation = new Reservation();
             reservation.setFk_livre(Integer.parseInt(body.get("fk_livre")));
             reservation.setFk_compte(Integer.parseInt(body.get("fk_compte")));
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
-            reservation.setRetour(LocalDate.parse(body.get("retour"),formatter));
+            reservation.setRetour(Date.valueOf(body.get("retour")));
             resp.setStatus(service.addReservation(reservation).httpCode());
         } else {
             handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
         }
+    }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, String> body = new HashMap<>();
+        String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
+        if (requestBody != null) {
+            Arrays.stream(requestBody.split("&"))
+                    .map(line -> line.split("="))
+                    .filter(pair -> pair.length == 2)
+                    .forEach(pair -> body.put(pair[0], pair[1]));
+        }
+        if (body.get("pk_reservation") != null && body.get("fk_livre") != null && body.get("fk_compte") != null && body.get("retour") != null) {
+            Reservation reservation = new Reservation();
+            reservation.setPk_reservation(Integer.parseInt(body.get("pk_reservation")));
+            reservation.setFk_livre(Integer.parseInt(body.get("fk_livre")));
+            reservation.setFk_compte(Integer.parseInt(body.get("fk_compte")));
+            reservation.setRetour(Date.valueOf(body.get("retour")));
+            resp.setStatus(service.modifyReservation(reservation).httpCode());
+        } else {
+            handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, String> body = new HashMap<>();
+        String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
+        if (requestBody != null) {
+            Arrays.stream(requestBody.split("&"))
+                    .map(line -> line.split("="))
+                    .filter(pair -> pair.length == 2)
+                    .forEach(pair -> body.put(pair[0], pair[1]));
+        }
+        if (body.get("pk_reservation") != null ) {
+            Reservation reservation = new Reservation();
+            reservation.setPk_reservation(Integer.parseInt(body.get("pk_reservation")));
+            resp.setStatus(service.deleteReservation(reservation).httpCode());
+        } else {
+            handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
+        }
     }
 
     private void handleMauvaiseRequete(HttpServletResponse resp, String message) throws IOException {

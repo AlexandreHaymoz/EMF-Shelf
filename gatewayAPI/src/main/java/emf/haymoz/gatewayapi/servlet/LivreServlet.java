@@ -93,7 +93,7 @@ public class LivreServlet extends HttpServlet {
         }
         if (body.get("PK_livre") != null && body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null && body.get("disponible") != null) {
             Livre livre = new Livre();
-            livre.setPK_Livre(Integer.parseInt(body.get("PK_Livre")));
+            livre.setPK_Livre(Integer.parseInt(body.get("PK_livre")));
             livre.setTitre(body.get("titre"));
             livre.setAuteur(body.get("auteur"));
             livre.setDescription(body.get("description"));
@@ -117,7 +117,7 @@ public class LivreServlet extends HttpServlet {
         }
         if (body.get("PK_livre") != null ) {
             Livre livre = new Livre();
-            livre.setPK_Livre(Integer.parseInt(body.get("PK_Livre")));
+            livre.setPK_Livre(Integer.parseInt(body.get("PK_livre")));
             resp.setStatus(service.deleteLivre(livre).httpCode());
         } else {
             handleMauvaiseRequete(resp, "Mauvaise requête, paramètre livre vide");
