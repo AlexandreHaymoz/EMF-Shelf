@@ -11,12 +11,11 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static emf.haymoz.gatewayapi.service.CommonService.httpGet;
-import static emf.haymoz.gatewayapi.service.CommonService.httpPost;
+import static emf.haymoz.gatewayapi.service.CommonService.*;
 
 public class LivreService {
     // URL du Rest
-    private static final String URL = "http://clapassonn.emf-informatique.ch/javaLivreREST/bibliotheque/livres";
+    private static final String URL = "https://clapassonn.emf-informatique.ch/javaLivreREST/bibliotheque/livres";
 
     // Pour serialiser des objets Java en JSON
     private static final Gson gson = new Gson();
@@ -32,12 +31,12 @@ public class LivreService {
 
     public int addLivre(Livre livre){
         String data = gson.toJson(livre);
-        return httpPost(URL , data);
+        return httpPostPutDelete(URL , data, "POST");
     }
 
     public int modifyLivre(Livre livre){
         String data = gson.toJson(livre);
-        return httpPost(URL , data);
+        return httpPostPutDelete(URL , data, "PUT");
     }
 
     /**

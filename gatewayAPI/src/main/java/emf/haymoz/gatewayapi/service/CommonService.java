@@ -34,11 +34,11 @@ public class CommonService {
         return new HttpData(500, null);
     }
 
-    protected static int httpPost(String url, String data) {
+    protected static int httpPostPutDelete(String url, String data, String typeMethod) {
         int httpCode = 500;
         try {
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-            conn.setRequestMethod("POST");
+            conn.setRequestMethod(typeMethod);
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
             OutputStream os = conn.getOutputStream();
