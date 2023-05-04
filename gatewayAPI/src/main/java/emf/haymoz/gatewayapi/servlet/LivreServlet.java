@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import java.util.Map;
 @WebServlet(name = "LivreServlet", description = "Servlet qui gère les livres", value = {"/livres"})
 public class LivreServlet extends HttpServlet {
 
-    LivreService service;
+    private LivreService service;
 
     @Override
     public void init() {
@@ -32,6 +33,8 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         String action = req.getParameter("action");
         HttpData httpData = new HttpData(500, "");
         if (action != null) {
@@ -62,6 +65,8 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         // Lecture du payload d'une requête POST
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
@@ -85,6 +90,8 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {
@@ -109,6 +116,8 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {

@@ -37,6 +37,8 @@ public class UtilisateurServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         String action = req.getParameter("action");
         if (action != null) {
             switch (action) {
@@ -56,6 +58,8 @@ public class UtilisateurServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {

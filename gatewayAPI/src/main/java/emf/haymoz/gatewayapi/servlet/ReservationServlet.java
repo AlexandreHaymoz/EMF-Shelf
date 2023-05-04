@@ -37,6 +37,8 @@ public class ReservationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         String action = req.getParameter("action");
         HttpData httpData = new HttpData(500, "");
         if (action != null) {
@@ -71,7 +73,8 @@ public class ReservationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Lecture du payload d'une requête POST
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
         if (requestBody != null) {
@@ -95,6 +98,8 @@ public class ReservationServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
         if (requestBody != null) {
@@ -117,6 +122,8 @@ public class ReservationServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
         if (requestBody != null) {
