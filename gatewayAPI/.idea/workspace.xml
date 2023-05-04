@@ -11,6 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +47,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -149,10 +152,27 @@
       <workItem from="1682605866826" duration="540000" />
       <workItem from="1682672227603" duration="135000" />
       <workItem from="1682679615882" duration="9282000" />
+      <workItem from="1683196193599" duration="11480000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -71,19 +71,21 @@ public class UtilisateurServlet extends HttpServlet {
                 switch (action) {
                     case "enregistrer" -> handleEnregistrer(req, resp, utilisateur);
                     case "connecter" -> handleConnecter(req, resp, utilisateur);
-                    case "nathan" -> {
-                        if (req.getSession().getAttribute("utilisateur") != null) {
-                            resp.getWriter().write("NATHAN!");
-                        } else {
-                            resp.getWriter().write("FABIEN!");
-                        }
-                    }
+                    case "deconnecter" -> handleDeconnecter(req, resp);
                     default -> handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Action inconnue");
                 }
             } else {
                 handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête");
             }
 
+        }
+    }
+
+    private void handleDeconnecter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        if (!(req.getSession().getAttribute("utilisateur") == null)) {
+            req.getSession().setAttribute("utilisateur", null);
+        } else {
+            handleMauvaiseRequete(resp, HttpURLConnection.HTTP_UNAUTHORIZED, "Accès non autorisée, vous n'êtes pas connecté");
         }
     }
 
@@ -94,6 +96,11 @@ public class UtilisateurServlet extends HttpServlet {
 
     private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, Utilisateur utilisateur) throws IOException {
         if (req.getSession().getAttribute("utilisateur") == null) {
+            // A changer dans le rest
+            if (utilisateur.getNom() == null || utilisateur.getMotDePasse() == null) {
+                utilisateur.setNom("");
+                utilisateur.setMotDePasse("");
+            }
             HttpData httpCode = service.connecter(utilisateur);
             if (httpCode.httpCode() == HttpURLConnection.HTTP_OK) {
                 HttpSession session = req.getSession();
@@ -104,7 +111,6 @@ public class UtilisateurServlet extends HttpServlet {
         } else {
             handleMauvaiseRequete(resp, HttpURLConnection.HTTP_FORBIDDEN, "Vous êtes déjà connecté");
         }
-
     }
 
     private void handleEnregistrer(HttpServletRequest req, HttpServletResponse resp, Utilisateur utilisateur) throws IOException {
@@ -122,7 +128,6 @@ public class UtilisateurServlet extends HttpServlet {
         } else {
             handleMauvaiseRequete(resp, HttpURLConnection.HTTP_FORBIDDEN, "Vous êtes déjà connecté");
         }
-
     }
 
     private void sendData(HttpServletResponse resp, HttpData httpData) throws IOException {
