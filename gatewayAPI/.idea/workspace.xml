@@ -11,8 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +151,7 @@
       <workItem from="1682605866826" duration="540000" />
       <workItem from="1682672227603" duration="135000" />
       <workItem from="1682679615882" duration="9282000" />
-      <workItem from="1683196193599" duration="13959000" />
+      <workItem from="1683196193599" duration="14986000" />
     </task>
     <servers />
   </component>

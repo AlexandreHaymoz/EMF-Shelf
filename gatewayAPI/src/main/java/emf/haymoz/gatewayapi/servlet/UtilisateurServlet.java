@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,15 +59,14 @@ public class UtilisateurServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort());
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {
-            Arrays.stream(requestBody.split("&"))
-                    .map(line -> line.split("="))
-                    .filter(pair -> pair.length == 2)
-                    .forEach(pair -> body.put(pair[0], pair[1]));
+            requestBody = java.net.URLDecoder.decode(requestBody, StandardCharsets.UTF_8);
+            Arrays.stream(requestBody.split("&")).map(line -> line.split("=")).filter(pair -> pair.length == 2).forEach(pair -> body.put(pair[0], pair[1]));
+        }
             String action = body.get("action");
             if (action != null) {
                 Utilisateur utilisateur = new Utilisateur();
@@ -83,7 +83,7 @@ public class UtilisateurServlet extends HttpServlet {
             }
 
         }
-    }
+
 
     private void handleDeconnecter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (!(req.getSession().getAttribute("utilisateur") == null)) {
