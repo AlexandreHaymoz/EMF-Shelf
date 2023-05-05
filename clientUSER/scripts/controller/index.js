@@ -1,6 +1,9 @@
 
 $(document).ready(function() {
     getLivres(displayLivres, displayInternalError);
+    $("#deconnecter").on("click", function() {
+        seDeconneter(displayDeconnecter, displayNonConnecte, displayInternalError)
+    })
 });
 
 function displayLivres(data) {
@@ -9,6 +12,13 @@ function displayLivres(data) {
     });
 }
 
+function displayDeconnecter() {
+    alert("Déconnection réussi")
+}
+
+function displayNonConnecte() {
+    alert("Vous n'êtes pas connecté")
+}
 
 function displayInternalError() {
     alert("Erreur interne du serveur.")

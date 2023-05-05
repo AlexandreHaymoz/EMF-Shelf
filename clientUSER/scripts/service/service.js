@@ -1,5 +1,6 @@
 
-const BASE_URL_UTILISATEUR = "http://wstemfa39-21:8888/gatewayAPI/utilisateurs"
+const BASE_URL_UTILISATEUR = "http://localhost:8080/gatewayAPI_war/utilisateurs"
+const BASE_URL_LIVRE = "http://localhost:8080/gatewayAPI_war/livres"
 
 function getLivres(displayLivres, displayInternalError) {
     $.ajax({
@@ -74,5 +75,44 @@ function enregistrer(nom, motDePasse, displayEnregistrer, displayMauvaiseRequete
             409: displayConflit,
             500: displayInternalError
         }
+    })
+}
+
+function seDeconneter(displayDeconnecter, displayNonConnecte, displayInternalError) {
+    $.ajax({
+        type: "POST",
+        dateType: "json",
+        url: BASE_URL_UTILISATEUR,
+        data: "action=deconnecter",
+        xhrFields: {
+            withCredentials: true
+            },
+            async: false,
+            crossDomain: true,
+            statusCode: {
+                200: displayDeconnecter,
+                401: displayNonConnecte,
+                500: displayInternalError
+            }
+    })
+}
+function ajouterLivre(titre, auteur, description, displayAjouterLivre, displayMauvaiseRequete, displayNonAdmin, displayNonConnecte, displayInternalError) {
+    $.ajax({
+        type: "POST",
+        dateTpye: "json",
+        url: BASE_URL_LIVRE,
+        data: "titre="+titre+"&auteur="+auteur+"&description="+description+"&image=-",
+        xhrFields: {
+            withCredentials: true
+            },
+            async: false,
+            crossDomain: true,
+            statusCode: {
+                200: displayAjouterLivre,
+                400: displayMauvaiseRequete,
+                403: displayNonAdmin,
+                401: displayNonConnecte,
+                500: displayInternalError
+            }
     })
 }

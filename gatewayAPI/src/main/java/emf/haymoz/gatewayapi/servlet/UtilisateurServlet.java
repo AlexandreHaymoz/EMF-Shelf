@@ -111,7 +111,7 @@ public class UtilisateurServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 utilisateur = gson.fromJson(httpCode.data(), Utilisateur.class);
                 session.setAttribute("utilisateur", utilisateur);
-                resp.setHeader("Set-Cookie", "JSESSIONID="+ session.getId()+"; HttpOnly; SameSite=none; secure");
+                resp.setHeader("Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; SameSite=none; secure");
             }
             resp.setStatus(httpCode.httpCode());
         } else {

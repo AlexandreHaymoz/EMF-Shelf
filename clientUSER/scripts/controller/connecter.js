@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 function displayConnecter(data) {
     alert("Connexion réussie")
-    
+    window.location.href = "/"
 }
 
 function displayMauvaiseID() {
