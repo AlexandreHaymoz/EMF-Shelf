@@ -54,6 +54,15 @@ public class Livres {
         String toJson = builder.toJson(wrk.lireLivre(PK_livre));
         return toJson;
     }
+    
+    @GET
+    @Path("/users/{PK_compte}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getLivresUser(@PathParam("PK_compte") int PK_compte) {
+        Gson builder = new Gson();
+        String toJson = builder.toJson(wrk.lireLivresUser(PK_compte));
+        return toJson;
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

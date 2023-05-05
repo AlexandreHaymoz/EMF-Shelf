@@ -132,6 +132,69 @@ public class WrkLivre {
         return resultat;
     }
     
+    public ArrayList<Livre> lireLivresUser(int PK_user) {
+        //On prépare nos variables.        
+        ArrayList<Livre> resultat = new ArrayList<>();
+        Statement stmt = null;
+        ResultSet rs = null;
+        //On essaie de se connecter à la base de données. 
+        if (dbConnect()) {
+            try {
+                //On essaie de créer une requête grâce à notre connexion. 
+                if ((stmt = jdbcConnection.createStatement()) != null) {
+                    //Ce string est la requête SQL qui va récupérer les enregistrements.    
+                    String sql = "SELECT PK_livre, titre, auteur, description, image, disponible FROM t_livres inner join t_reservations on FK_livre = PK_livre where FK_compte=" + PK_user;
+                    //On exécute la requête et on stocke la réponse dans un "ResulSet"
+                    //Si notre "ResulSet" contient quelque chose, c'est qu'on a reçu une réponse !
+                    if ((rs = stmt.executeQuery(sql)) != null) {
+                        //On effectue une boucle qui va parcourir notre résultat.
+                        //La méthode ".next()" avance d'un index renvoie "true"
+                        //s'il y a un résultat. Sinon, "false" quand il atteint
+                        //un enregistrement null.
+                        while (rs.next()) {
+                            int PK_livre = rs.getInt("PK_livre");
+                            String titre = rs.getString("titre");
+                            String auteur = rs.getString("auteur");
+                            String description = rs.getString("description");
+                            String image = rs.getString("image");
+                            int disponible = rs.getInt("disponible");
+                            Livre livre = new Livre(PK_livre,titre, auteur, description, image, disponible);
+                            //On stocke notre String dans notre résultat final.
+                            resultat.add(livre);
+                        }
+                    }
+                    //On ferme le tout pour optimiser les performances.                    
+                    rs.close();
+                    rs = null;
+                    stmt.close();
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(WrkLivre.class.getName()).log(Level.SEVERE, null, ex);
+            } //On repasse les variables pour vérifier que tout est bien fermé. //On repasse les variables pour vérifier que tout est bien fermé.
+            finally {
+                dbDisconnect();
+                try {
+                    if (rs != null) {
+                        rs.close();
+                        rs = null;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(WrkLivre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                        stmt = null;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(WrkLivre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return resultat;
+    }
+    
     public Livre lireLivre(int PK_livre) {
         //On prépare nos variables.        
         Livre resultat = null;
