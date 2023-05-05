@@ -61,7 +61,6 @@ public class UtilisateurServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
-        resp.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=strict");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {
@@ -110,6 +109,7 @@ public class UtilisateurServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 utilisateur = gson.fromJson(httpCode.data(), Utilisateur.class);
                 session.setAttribute("utilisateur", utilisateur);
+                session.setAttribute("SameSite", "None");
             }
             resp.setStatus(httpCode.httpCode());
         } else {
