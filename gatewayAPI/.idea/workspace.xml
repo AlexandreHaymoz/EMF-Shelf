@@ -11,12 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/build/web/test-resbeans.html" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/build/web/test-resbeans.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/rest/Livres.java" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/src/java/rest/Livres.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkLivre.java" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/src/java/wrk/WrkLivre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/web/test-resbeans.html" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/web/test-resbeans.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +51,7 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Tomcat 8.5.751" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.751" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="gatewayAPI:war">
@@ -65,7 +61,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="4e55b065-b86f-433e-b7fc-0a0e95796073" />
+        <option name="BASE_DIRECTORY_NAME" value="0083566a-adb1-468a-82d8-28c615678334" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -73,7 +69,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="61796" />
+        <option name="DEBUG_PORT" value="50537" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -172,12 +168,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java</url>
-          <line>121</line>
+          <line>129</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java</url>
-          <line>95</line>
+          <line>103</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>

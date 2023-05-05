@@ -14,9 +14,11 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.http.HttpHeaders;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
@@ -109,7 +111,7 @@ public class UtilisateurServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 utilisateur = gson.fromJson(httpCode.data(), Utilisateur.class);
                 session.setAttribute("utilisateur", utilisateur);
-                session.setAttribute("SameSite", "None");
+                resp.setHeader("Set-Cookie", "JSESSIONID="+ session.getId()+"; HttpOnly; SameSite=none; secure");
             }
             resp.setStatus(httpCode.httpCode());
         } else {

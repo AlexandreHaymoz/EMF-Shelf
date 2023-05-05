@@ -1,4 +1,4 @@
-const BASE_URL_LIVRE = "http://wstemfa39-21:8888/gatewayAPI/livres"
+
 const BASE_URL_UTILISATEUR = "http://wstemfa39-21:8888/gatewayAPI/utilisateurs"
 
 function getLivres(displayLivres, displayInternalError) {
