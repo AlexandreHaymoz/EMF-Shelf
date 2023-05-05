@@ -114,6 +114,7 @@ public class UtilisateurServlet extends HttpServlet {
                 resp.setHeader("Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; SameSite=none; secure");
             }
             resp.setStatus(httpCode.httpCode());
+            sendData(resp, httpCode);
         } else {
             handleMauvaiseRequete(resp, HttpURLConnection.HTTP_FORBIDDEN, "Vous êtes déjà connecté");
         }
