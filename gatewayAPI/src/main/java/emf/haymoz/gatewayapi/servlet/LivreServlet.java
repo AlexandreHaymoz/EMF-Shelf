@@ -33,7 +33,7 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort());
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName());
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         String action = req.getParameter("action");
         HttpData httpData = new HttpData(500, "");
@@ -65,7 +65,7 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort());
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName());
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         // Lecture du payload d'une requête POST
         Map<String, String> body = new HashMap<>();
@@ -90,7 +90,7 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort());
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName());
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
@@ -116,7 +116,7 @@ public class LivreServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort());
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName());
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
