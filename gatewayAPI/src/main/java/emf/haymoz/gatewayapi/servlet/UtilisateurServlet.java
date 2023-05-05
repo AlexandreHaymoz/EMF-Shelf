@@ -38,7 +38,7 @@ public class UtilisateurServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() );
+        resp.setHeader("Access-Control-Allow-Origin", req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort());
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         String action = req.getParameter("action");
         if (action != null) {

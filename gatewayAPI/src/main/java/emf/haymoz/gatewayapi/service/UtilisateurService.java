@@ -18,7 +18,6 @@ public class UtilisateurService {
 
     public HttpData connecter(Utilisateur utilisateur) {
         String data = gson.toJson(utilisateur);
-        System.out.println(data);
         return httpRequest(URL + "/connecter", data, "POST");
     }
 
