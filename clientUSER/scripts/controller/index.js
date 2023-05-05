@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    $.getScript("../service/service.js")
     getLivres(displayLivres, displayInternalError);
 });
 
