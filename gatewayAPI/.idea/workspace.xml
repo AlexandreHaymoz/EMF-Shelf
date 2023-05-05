@@ -10,9 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../compteREST/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../compteREST/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../clientUSER/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../clientUSER/scripts/controller/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/scripts/controller/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../clientUSER/scripts/service/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/scripts/service/service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +157,7 @@
       <workItem from="1682679615882" duration="9282000" />
       <workItem from="1683196193599" duration="15117000" />
       <workItem from="1683266245770" duration="1869000" />
+      <workItem from="1683268665674" duration="4104000" />
     </task>
     <servers />
   </component>
