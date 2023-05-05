@@ -29,10 +29,6 @@ public class LivreService {
         return httpRequest(URL + "/" + pk, null, "GET");
     }
 
-    public HttpData getLivresUser(String pk) {
-        return httpRequest(URL + "/users/" + pk, null, "GET");
-    }
-
     public HttpData addLivre(Livre livre){
         String data = gson.toJson(livre);
         return httpRequest(URL , data, "POST");

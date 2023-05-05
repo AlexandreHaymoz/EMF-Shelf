@@ -10,11 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../assets/documents/133_UML_G02_.eap" beforeDir="false" afterPath="$PROJECT_DIR$/../assets/documents/133_UML_G02_.eap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../livreREST/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +50,7 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Tomcat 8.5.751" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.751" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="gatewayAPI:war">
@@ -63,7 +60,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="c503c474-c476-4d62-aefc-92ab7a84f5ab" />
+        <option name="BASE_DIRECTORY_NAME" value="8054a59f-39ca-496c-b848-3aa153e309e4" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -71,7 +68,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="60084" />
+        <option name="DEBUG_PORT" value="51527" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -155,7 +152,8 @@
       <workItem from="1682679615882" duration="9282000" />
       <workItem from="1683196193599" duration="15117000" />
       <workItem from="1683266245770" duration="1869000" />
-      <workItem from="1683268665674" duration="4104000" />
+      <workItem from="1683268665674" duration="4723000" />
+      <workItem from="1683277271025" duration="4284000" />
     </task>
     <servers />
   </component>
@@ -167,8 +165,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java</url>
-          <line>129</line>
+          <line>121</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

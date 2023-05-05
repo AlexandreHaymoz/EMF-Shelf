@@ -42,14 +42,6 @@ public class LivreServlet extends HttpServlet {
                 case "getLivres" -> {
                     httpData = service.getLivres();
                 }
-                case "getLivresUser" -> {
-                    String pk = req.getParameter("pk");
-                    if (pk != null) {
-                        httpData = service.getLivresUser(pk);
-                    } else {
-                        handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête, paramètre PK vide");
-                    }
-                }
                 case "getLivre" -> {
                     String pk = req.getParameter("pk");
                     if (pk != null) {

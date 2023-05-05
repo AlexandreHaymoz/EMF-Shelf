@@ -61,6 +61,7 @@ public class UtilisateurServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=strict");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {
@@ -100,7 +101,6 @@ public class UtilisateurServlet extends HttpServlet {
 
     private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, Utilisateur utilisateur) throws IOException {
         if (req.getSession().getAttribute("utilisateur") == null) {
-            // A changer dans le rest
             if (utilisateur.getNom() == null || utilisateur.getMotDePasse() == null) {
                 utilisateur.setNom("");
                 utilisateur.setMotDePasse("");
