@@ -1,7 +1,7 @@
 
-const BASE_URL_UTILISATEUR = "http://localhost:8080/gatewayAPI_war/utilisateurs"
-const BASE_URL_LIVRE = "http://localhost:8080/gatewayAPI_war/livres"
-const BASE_URL_RESERVATION = "http://localhost:8080/gatewayAPI_war/reservations"
+const BASE_URL_UTILISATEUR = "https://quoinkk.dedyn.io/gatewayAPI/utilisateurs"
+const BASE_URL_LIVRE = "https://quoinkk.dedyn.io/gatewayAPI/livres"
+const BASE_URL_RESERVATION = "https://quoinkk.dedyn.io/gatewayAPI/reservations"
 
 function getLivres(displayLivres, displayInternalError) {
     $.ajax({
