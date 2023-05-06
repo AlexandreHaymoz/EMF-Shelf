@@ -13,7 +13,7 @@ Le seul "Workaround" que nous avons trouvé est de désactiver les CORS via la c
 ```
 google --disable-web-security --user-data-dir="[some directory here]"
 ```
-
-
 Client ADMIN : http://haymozn.emf-informatique.ch/clientADMIN/
+
+
 Client USER :  http://haymozn.emf-informatique.ch/clientUSER/
