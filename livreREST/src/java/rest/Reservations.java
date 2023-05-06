@@ -6,7 +6,6 @@ package rest;
 
 import bean.Reservation;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -60,7 +59,7 @@ public class Reservations {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public String addReservation(String json) {
-        Gson builder = new GsonBuilder().setDateFormat("MM-dd-yyyy").create();
+        Gson builder = new Gson();
         Reservation reservation = builder.fromJson(json, Reservation.class);
         String s;
         if (wrk.ajouterReservation(reservation.getFk_livre(), reservation.getFk_compte(), reservation.getRetour())) {
@@ -75,7 +74,7 @@ public class Reservations {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public String modifyReservation(String json) {
-        Gson builder = new GsonBuilder().setDateFormat("MM-dd-yyyy").create();
+        Gson builder = new Gson();
         Reservation reservation = builder.fromJson(json, Reservation.class);
         String s;
         if (wrk.modifyReservation(reservation.getFk_livre(), reservation.getFk_compte(), reservation.getRetour(), reservation.getPk_reservation())) {
