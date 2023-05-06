@@ -22,22 +22,27 @@ import java.util.Iterator;
 import java.util.Map;
 
 
-@WebServlet(
-        name = "UtilisateurServlet",
-        description = "Servlet qui gère les utilisateurs",
-        urlPatterns = {"/utilisateurs"}
-)
+@WebServlet(name = "UtilisateurServlet", description = "Servlet qui gère les utilisateurs", urlPatterns = {"/utilisateurs"})
 public class UtilisateurServlet extends HttpServlet {
     private UtilisateurService service;
     private static final Gson gson = new Gson();
     private static final String REGEX_NOM = "^[a-zA-Z]{3,18}$";
     private static final String REGEX_MOTDEPASSE = "(?=^.{8,18}$)((?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=(.*\\d){1,}))((?!.*[\",;&|'])|(?=(.*\\W){1,}))(?!.*[\",;&|'])^.*$";
 
+    /**
+     * Initialisation de la servlet.
+     */
     @Override
-    public void init() throws ServletException {
+    public void init() {
         service = new UtilisateurService();
     }
 
+    /**
+     * Traitement des requêtes GET.
+     *
+     * @param req  la requête reçue
+     * @param resp la réponse à envoyer
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
@@ -61,6 +66,12 @@ public class UtilisateurServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Traitement des requêtes POST.
+     *
+     * @param req  la requête reçue
+     * @param resp la réponse à envoyer
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
@@ -73,24 +84,29 @@ public class UtilisateurServlet extends HttpServlet {
             requestBody = java.net.URLDecoder.decode(requestBody, StandardCharsets.UTF_8);
             Arrays.stream(requestBody.split("&")).map(line -> line.split("=")).filter(pair -> pair.length == 2).forEach(pair -> body.put(pair[0], pair[1]));
         }
-            String action = body.get("action");
-            if (action != null) {
-                Utilisateur utilisateur = new Utilisateur();
-                utilisateur.setNom(body.get("nom"));
-                utilisateur.setMotDePasse(body.get("motDePasse"));
-                switch (action) {
-                    case "enregistrer" -> handleEnregistrer(req, resp, utilisateur);
-                    case "connecter" -> handleConnecter(req, resp, utilisateur);
-                    case "deconnecter" -> handleDeconnecter(req, resp);
-                    default -> handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Action inconnue");
-                }
-            } else {
-                handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête");
+        String action = body.get("action");
+        if (action != null) {
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setNom(body.get("nom"));
+            utilisateur.setMotDePasse(body.get("motDePasse"));
+            switch (action) {
+                case "enregistrer" -> handleEnregistrer(req, resp, utilisateur);
+                case "connecter" -> handleConnecter(req, resp, utilisateur);
+                case "deconnecter" -> handleDeconnecter(req, resp);
+                default -> handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Action inconnue");
             }
-
+        } else {
+            handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête");
         }
 
+    }
 
+    /**
+     * Gère les requêtes de deconnecter en invalidant la session si l'utilisateur est connecté.
+     *
+     * @param req  la requête reçue.
+     * @param resp la réponse envoyée.
+     */
     private void handleDeconnecter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (!(req.getSession().getAttribute("utilisateur") == null)) {
             req.getSession().setAttribute("utilisateur", null);
@@ -99,11 +115,24 @@ public class UtilisateurServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Gère une mauvaise requête en retournant une réponse avec un code d'erreur HTTP et un message d'erreur.
+     *
+     * @param resp     la requête reçue.
+     * @param httpCode la réponse envoyée.
+     */
     private void handleMauvaiseRequete(HttpServletResponse resp, int httpCode, String message) throws IOException {
         resp.setStatus(httpCode);
         resp.getWriter().write(message);
     }
 
+    /**
+     * Gère la connexion d'un utilisateur en renvoyant un JSON de l'utilisateur vers le client de la requête.
+     *
+     * @param req         la requête reçue.
+     * @param resp        la réponse envoyée.
+     * @param utilisateur l'utilisateur qui souhaite se connecter
+     */
     private void handleConnecter(HttpServletRequest req, HttpServletResponse resp, Utilisateur utilisateur) throws IOException {
         if (req.getSession().getAttribute("utilisateur") == null) {
             if (utilisateur.getNom() == null || utilisateur.getMotDePasse() == null) {
@@ -115,7 +144,7 @@ public class UtilisateurServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 utilisateur = gson.fromJson(httpCode.data(), Utilisateur.class);
                 session.setAttribute("utilisateur", utilisateur);
-                resp.setHeader("Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; SameSite=none; secure");
+                resp.setHeader("Set-Cookie", "JSESSIONID=" + session.getId() + "; HttpOnly; SameSite=none; secure");
             }
             resp.setStatus(httpCode.httpCode());
             sendData(resp, httpCode);
@@ -124,6 +153,13 @@ public class UtilisateurServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Gère la requête d'enregistrement d'un utilisateur en renvoyant un code HTTP.
+     *
+     * @param req         la requête reçue.
+     * @param resp        la réponse envoyée.
+     * @param utilisateur l'utilisateur qui souhaite s'enregistrer
+     */
     private void handleEnregistrer(HttpServletRequest req, HttpServletResponse resp, Utilisateur utilisateur) throws IOException {
         if (req.getSession().getAttribute("utilisateur") == null) {
             if (utilisateur.getNom() != null && utilisateur.getNom().matches(REGEX_NOM)) {
@@ -141,6 +177,12 @@ public class UtilisateurServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Envoie les données HTTP au client sous forme JSON.
+     *
+     * @param resp     la réponse envoyée.
+     * @param httpData Les données HTTP à envoyer au client.
+     */
     private void sendData(HttpServletResponse resp, HttpData httpData) throws IOException {
         PrintWriter out = resp.getWriter();
         resp.setContentType("Application/json");

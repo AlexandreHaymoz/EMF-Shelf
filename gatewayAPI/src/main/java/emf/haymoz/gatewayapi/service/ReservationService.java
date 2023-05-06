@@ -21,25 +21,51 @@ public class ReservationService {
     // Pour serialiser des objets Java en JSON
     private static final Gson gson = new GsonBuilder().setDateFormat("MM-dd-yyyy").create();
 
+    /**
+     * Récupére toutes les réservations
+     *
+     * @return  un objet HttpData contenant le code de réponse HTTP et les données renvoyées par le serveur (s'il y en a)
+     */
 
     public HttpData getReservations() {
         return httpRequest(URL, null, "GET");
     }
 
+    /**
+     * Récupère les informations d'une réservation à partir de sa clé primaire.
+     *
+     * @param pk la clé primaire de la réservation à récupérer.
+     * @return un objet HttpData contenant le code de réponse HTTP et les données renvoyées par le serveur (s'il y en a)
+     */
     public HttpData getReservation(String pk) {
         return httpRequest(URL + "/" + pk, null, "GET");
     }
-
+    /**
+     * Ajoute une réservation
+     *
+     * @param reservation l'objet Reservation à ajouter.
+     * @return objet HttpData contenant le code de réponse HTTP et les données renvoyées par le serveur (s'il y en a)
+     */
     public HttpData addReservation(Reservation reservation){
         String data = gson.toJson(reservation);
         return httpRequest(URL , data, "POST");
     }
-
+    /**
+     * Modifie les informations d'une réservation à partir de son objet Reservation.
+     *
+     * @param reservation l'objet Reservation à modifier.
+     * @return objet HttpData contenant le code de réponse HTTP et les données renvoyées par le serveur (s'il y en a)
+     */
     public HttpData modifyReservation(Reservation reservation){
         String data = gson.toJson(reservation);
         return httpRequest(URL , data, "PUT");
     }
-
+    /**
+     * Supprime une réservation de la bibliothèque à partir de son objet Reservation.
+     *
+     * @param reservation l'objet Reservation à supprimer.
+     * @return objet HttpData contenant le code de réponse HTTP et les données renvoyées par le serveur (s'il y en a)
+     */
     public HttpData deleteReservation(Reservation reservation){
         String data = gson.toJson(reservation);
         return httpRequest(URL , data, "DELETE");

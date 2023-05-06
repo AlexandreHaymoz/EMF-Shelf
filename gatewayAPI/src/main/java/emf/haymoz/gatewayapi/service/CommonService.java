@@ -13,6 +13,15 @@ import java.net.URL;
 
 public class CommonService {
 
+    /**
+     * Permet d'envoyer une requête HTTP en fonction de la méthode et de l'URL fournis.
+     *
+     * @param url l'URL à utiliser pour la requête
+     * @param data les données à envoyer dans la requête
+     * @param typeMethod la méthode HTTP à utiliser (POST, PUT, DELETE, etc.)
+     * @return un objet HttpData contenant le code de réponse HTTP et les données renvoyées par le serveur (s'il y en a)
+     */
+
     protected static HttpData httpRequest(String url, String data, String typeMethod) {
         int httpCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
         try {
@@ -39,6 +48,12 @@ public class CommonService {
         return new HttpData(httpCode, null);
     }
 
+    /**
+     * Permet de récupérer les données renvoyées par une requête HTTP.
+     *
+     * @param conn l'objet HttpURLConnection qui représente la connexion à utiliser pour la récupération des données
+     * @return un objet HttpData contenant le code de réponse HTTP et les données renvoyées par le serveur (s'il y en a)
+     */
     private static HttpData getData(HttpURLConnection conn) {
         try {
             int responseCode = conn.getResponseCode();

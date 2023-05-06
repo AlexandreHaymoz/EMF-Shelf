@@ -20,6 +20,8 @@ Un dossier est dédié aux documents externes tel que le planning ou le fichier 
 
 ## Live demo
 
+Un client ADMIN a été créé avec les identifiants suivants : admin - Pa$$w0rd_
+
 Livres REST : https://clapassonn.emf-informatique.ch/javaLivreREST/bibliotheque/livres
 
 Reservation REST : https://clapassonn.emf-informatique.ch/javaLivreREST/bibliotheque/reservations
@@ -34,4 +36,4 @@ Client ADMIN : http://haymozn.emf-informatique.ch/clientADMIN/
 
 Client USER :  http://haymozn.emf-informatique.ch/clientUSER/
 
-Une gateway spéciale a été mise en place sous un VPS via Docker (Certifié avec Certbot) sous l'URL suivante : https://quoinkk.dedyn.io/gatewayAPI/
+Une gateway spéciale a été mise en place sous un VPS via Docker (Certifiée avec Certbot) sous l'URL suivante : https://quoinkk.dedyn.io/gatewayAPI/

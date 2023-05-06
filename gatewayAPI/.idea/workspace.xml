@@ -10,11 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a3dbf29-48de-4f30-b99b-05436d71db85" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../clientUSER/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clientUSER/scripts/controller/connecter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/scripts/controller/connecter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clientUSER/scripts/controller/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/scripts/controller/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clientUSER/scripts/controller/livre.js" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/scripts/controller/livre.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clientUSER/scripts/service/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../clientUSER/scripts/service/service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/documents/133_RP_G02.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../assets/documents/133_RP_G02.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/CommonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/CommonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/LivreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/service/UtilisateurService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/LivreServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/ReservationServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/emf/haymoz/gatewayapi/servlet/UtilisateurServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,6 +174,8 @@
       <workItem from="1683316232972" duration="874000" />
       <workItem from="1683360529732" duration="6588000" />
       <workItem from="1683395920418" duration="3606000" />
+      <workItem from="1683405933669" duration="451000" />
+      <workItem from="1683407655956" duration="1329000" />
     </task>
     <servers />
   </component>

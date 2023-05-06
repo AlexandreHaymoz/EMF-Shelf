@@ -25,12 +25,20 @@ import java.util.Map;
 public class LivreServlet extends HttpServlet {
 
     private LivreService service;
-
+    /**
+     * Initialisation de la servlet.
+     */
     @Override
     public void init() {
         service = new LivreService();
     }
 
+    /**
+     * Traitement des requêtes GET.
+     *
+     * @param req  la requête reçue
+     * @param resp la réponse à envoyer
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
@@ -76,7 +84,12 @@ public class LivreServlet extends HttpServlet {
         out.print(httpData.data());
         out.flush();
     }
-
+    /**
+     * Traitement des requêtes POST.
+     *
+     * @param req  la requête reçue
+     * @param resp la réponse à envoyer
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
@@ -103,7 +116,12 @@ public class LivreServlet extends HttpServlet {
             }
         }
     }
-
+    /**
+     * Traitement des requêtes PUT.
+     *
+     * @param req  la requête reçue
+     * @param resp la réponse à envoyer
+     */
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
@@ -131,7 +149,12 @@ public class LivreServlet extends HttpServlet {
             }
         }
     }
-
+    /**
+     * Traitement des requêtes DELETE.
+     *
+     * @param req  la requête reçue
+     * @param resp la réponse à envoyer
+     */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
@@ -154,12 +177,22 @@ public class LivreServlet extends HttpServlet {
             }
         }
     }
-
+    /**
+     Gère les requêtes HTTP mal formées en retournant une réponse avec le code d'erreur HTTP approprié et un message d'erreur.
+     @param resp la réponse HTTP à envoyer
+     @param httpCode le code d'erreur HTTP
+     @param message le message d'erreur à inclure dans la réponse
+     */
     private void handleMauvaiseRequete(HttpServletResponse resp, int httpCode, String message) throws IOException {
         resp.setStatus(httpCode);
         resp.getWriter().write(message);
     }
-
+    /**
+     * Permet de vérifier si l'utilisateur connecté est un administrateur.
+     *
+     * @param req  la requête reçue
+     * @param resp la réponse à envoyer
+     */
     private boolean checkIsAdmin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         boolean isOk = false;
         if (req.getSession().getAttribute("utilisateur") != null) {
