@@ -1,9 +1,6 @@
 $(document).ready(function () {
     pkLivre = new URL(window.location.href).searchParams.get("pkLivre")
     getLivre(displayLivre, displayInternalError, pkLivre);
-    $("#reserver").on("click", function() {
-        reserverLivre(pkLivre, displayReserverLivre, displayMauvaiseRequete, displayNonConnecte, displayInternalError)
-    })
 })
 
 function displayLivre(data) {
@@ -11,14 +8,19 @@ function displayLivre(data) {
     $("#auteur").text(data.auteur)
     $("#description").text(data.description)
     $("#disponible").text(data.disponible)
+    $("#effacer").on("click", function () {
+        effacerLivre(pkLivre, displayEffacerLivre, displayMauvaiseRequete, displayNonConnecte, displayNonAdmin, displayInternalError)
+    })
+    $("#effacer").after('<a href="/pages/modifierLivre.html?PK_Livre='+new URL(window.location.href).searchParams.get("pkLivre")+'&Titre='+data.titre+'&auteur='+data.auteur+'"><input id="modifier" type="submit" value="Modifier"/></a>')
 }
 
 function displayInternalError() {
     alert("Erreur interne du serveur.")
 }
 
-function displayReserverLivre() {
-    alert("Le livre a été réservé")
+function displayEffacerLivre() {
+    alert("Le livre a été éffacé")
+    window.location.href = "/pages/gestionIndex.html"
 }
 
 function displayMauvaiseRequete() {
@@ -27,6 +29,10 @@ function displayMauvaiseRequete() {
 
 function displayNonConnecte() {
     alert("Vous n'êtes pas connecté")
+}
+
+function displayNonAdmin() {
+    alert("Vous n'êtes pas un admin")
 }
 
 function displayInternalError() {

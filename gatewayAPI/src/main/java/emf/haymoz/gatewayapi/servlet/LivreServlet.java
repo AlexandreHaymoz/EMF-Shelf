@@ -35,6 +35,8 @@ public class LivreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         String action = req.getParameter("action");
         HttpData httpData = new HttpData(500, "");
         if (action != null) {
@@ -45,7 +47,11 @@ public class LivreServlet extends HttpServlet {
                 case "getLivresUser" -> {
                     String pk = req.getParameter("pk");
                     if (pk != null) {
-                        httpData = service.getLivresUser(pk);
+                        if (req.getSession().getAttribute("utilisateur") != null) {
+                            httpData = service.getLivresUser(pk);
+                        } else {
+                            handleMauvaiseRequete(resp, HttpURLConnection.HTTP_UNAUTHORIZED, "Accès non autorisée, vous n'êtes pas connecté");
+                        }
                     } else {
                         handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête, paramètre PK vide");
                     }
@@ -75,6 +81,8 @@ public class LivreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         // Lecture du payload d'une requête POST
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
@@ -100,6 +108,8 @@ public class LivreServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {
@@ -107,14 +117,14 @@ public class LivreServlet extends HttpServlet {
             Arrays.stream(requestBody.split("&")).map(line -> line.split("=")).filter(pair -> pair.length == 2).forEach(pair -> body.put(pair[0], pair[1]));
         }
         if (checkIsAdmin(req, resp)) {
-            if (body.get("PK_livre") != null && body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null && body.get("disponible") != null) {
+            if (body.get("PK_livre") != null && body.get("titre") != null && body.get("auteur") != null && body.get("description") != null && body.get("image") != null) {
                 Livre livre = new Livre();
                 livre.setPK_Livre(Integer.parseInt(body.get("PK_livre")));
                 livre.setTitre(body.get("titre"));
                 livre.setAuteur(body.get("auteur"));
                 livre.setDescription(body.get("description"));
                 livre.setImage(body.get("image"));
-                livre.setDisponible(Integer.parseInt(body.get("disponible")));
+                livre.setDisponible(1);
                 resp.setStatus(service.modifyLivre(livre).httpCode());
             } else {
                 handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête, paramètre vide");
@@ -126,6 +136,8 @@ public class LivreServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {

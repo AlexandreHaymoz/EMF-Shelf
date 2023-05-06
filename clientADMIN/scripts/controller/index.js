@@ -10,10 +10,17 @@ $(document).ready(function () {
     })
 })
 
+
 function displayConnecter(data) {
-    alert("Connexion réussie")
-    sessionStorage.setItem("nom", data.nom);
-    window.location.href = "/"
+    if (data.administrateur) {
+        alert("Connexion réussie")
+        sessionStorage.setItem("isConnected", true);
+        window.location.href = "/pages/gestionIndex.html"
+    } else {
+        alert("Connexion refusée, vous n'êtes pas admin")
+        seDeconneter()
+    }
+
 }
 
 function displayMauvaiseID() {

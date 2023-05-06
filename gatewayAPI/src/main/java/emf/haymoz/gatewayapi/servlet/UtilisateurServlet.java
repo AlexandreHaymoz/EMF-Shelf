@@ -42,6 +42,8 @@ public class UtilisateurServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         String action = req.getParameter("action");
         if (action != null) {
             switch (action) {
@@ -63,6 +65,8 @@ public class UtilisateurServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         Map<String, String> body = new HashMap<>();
         String requestBody = req.getReader().readLine();
         if (requestBody != null) {

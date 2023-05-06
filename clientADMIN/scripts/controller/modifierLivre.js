@@ -1,18 +1,24 @@
 $(document).ready(function () {
-    $("#addLivre").on("click", function() {
+    pkLivre = new URL(window.location.href).searchParams.get("PK_Livre")
+    $("#titre").val(new URL(window.location.href).searchParams.get("Titre"))
+    $("#auteur").val(new URL(window.location.href).searchParams.get("auteur"))
+    $("#modifierLivre").on("click", function () {
         let titre = $("#titre").val();
         let auteur = $("#auteur").val();
         let description = $("#description").val();
         if (titre == "" || auteur == "" || description == "") {
             alert("Veuillez remplir tous les champs")
         } else {
-            ajouterLivre(titre, auteur, description, displayAjouterLivre, displayMauvaiseRequete, displayNonAdmin, displayNonConnecte, displayInternalError)
+            modifierLivre(pkLivre, titre, auteur, description, displayModifierLivre, displayMauvaiseRequete, displayNonConnecte, displayNonAdmin, displayInternalError)
         }
     })
 })
 
-function displayAjouterLivre() {
-    alert("Un livre a été ajouté!")
+
+
+function displayModifierLivre() {
+    alert("Un livre a été modifié!")
+    window.location.href = "/pages/gestionIndex.html"
 }
 
 function displayMauvaiseRequete() { 

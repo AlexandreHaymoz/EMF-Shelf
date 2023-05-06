@@ -28,7 +28,7 @@ import java.util.Map;
 @WebServlet(name = "ReservationServlet", description = "Servlet qui gère les réservations et les livres", value = {"/reservations"})
 public class ReservationServlet extends HttpServlet {
 
-    ReservationService service;
+    private ReservationService service;
 
     @Override
     public void init() throws ServletException {
@@ -39,6 +39,8 @@ public class ReservationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         String action = req.getParameter("action");
         HttpData httpData = new HttpData(500, "");
         if (action != null) {
@@ -69,12 +71,15 @@ public class ReservationServlet extends HttpServlet {
         // retourne le json chez l'utilisateur
         out.print(httpData.data());
         out.flush();
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         Map<String, String> body = new HashMap<>();
         String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
         if (requestBody != null) {
@@ -86,7 +91,9 @@ public class ReservationServlet extends HttpServlet {
                 reservation.setFk_livre(Integer.parseInt(body.get("fk_livre")));
                 reservation.setFk_compte(((Utilisateur) req.getSession().getAttribute("utilisateur")).getPkUtilisateur());
                 reservation.setRetour(Date.valueOf(LocalDate.now().plusDays(30)));
-                resp.setStatus(service.addReservation(reservation).httpCode());
+                HttpData x = service.addReservation(reservation);
+                resp.setStatus(x.httpCode());
+                sendData(resp, x);
             } else {
                 handleMauvaiseRequete(resp, HttpURLConnection.HTTP_BAD_REQUEST, "Mauvaise requête, paramètre vide");
             }
@@ -100,6 +107,8 @@ public class ReservationServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         Map<String, String> body = new HashMap<>();
         String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
         if (requestBody != null) {
@@ -124,6 +133,8 @@ public class ReservationServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         Map<String, String> body = new HashMap<>();
         String requestBody = java.net.URLDecoder.decode(req.getReader().readLine(), StandardCharsets.UTF_8.name());
         if (requestBody != null) {
@@ -158,5 +169,13 @@ public class ReservationServlet extends HttpServlet {
             handleMauvaiseRequete(resp, HttpURLConnection.HTTP_UNAUTHORIZED, "Accès non autorisée, vous n'êtes pas connecté");
         }
         return isOk;
+    }
+
+    private void sendData(HttpServletResponse resp, HttpData httpData) throws IOException {
+        PrintWriter out = resp.getWriter();
+        resp.setContentType("Application/json");
+        resp.setCharacterEncoding("UTF-8");
+        out.print(httpData.data());
+        out.flush();
     }
 }

@@ -1,6 +1,7 @@
 
 const BASE_URL_UTILISATEUR = "http://localhost:8080/gatewayAPI_war/utilisateurs"
 const BASE_URL_LIVRE = "http://localhost:8080/gatewayAPI_war/livres"
+const BASE_URL_RESERVATION = "http://localhost:8080/gatewayAPI_war/reservations"
 
 function getLivres(displayLivres, displayInternalError) {
     $.ajax({
@@ -96,23 +97,41 @@ function seDeconneter(displayDeconnecter, displayNonConnecte, displayInternalErr
             }
     })
 }
-function ajouterLivre(titre, auteur, description, displayAjouterLivre, displayMauvaiseRequete, displayNonAdmin, displayNonConnecte, displayInternalError) {
+
+function reserverLivre(pkLivre, displayReserverLivre, displayMauvaiseRequete, displayNonConnecte, displayInternalError) {
     $.ajax({
         type: "POST",
         dateTpye: "json",
-        url: BASE_URL_LIVRE,
-        data: "titre="+titre+"&auteur="+auteur+"&description="+description+"&image=-",
+        url: BASE_URL_RESERVATION,
+        data: "fk_livre="+pkLivre,
         xhrFields: {
             withCredentials: true
             },
             async: false,
             crossDomain: true,
             statusCode: {
-                200: displayAjouterLivre,
+                200: displayReserverLivre,
                 400: displayMauvaiseRequete,
-                403: displayNonAdmin,
                 401: displayNonConnecte,
                 500: displayInternalError
             }
+    })
+}
+
+function getReservations(displayLivre, displayInternalError, pkLivre) {
+    $.ajax({
+        type: "GET",
+        dateType: "json",
+        url: BASE_URL_LIVRE + "?action=getLivresUser&pk="+pkLivre,
+        xhrFields: {
+            withCredentials: true
+            },
+            async: false,
+            crossDomain: true,
+        statusCode: {
+            200: displayLivre,
+            401: displayNonConnecte,
+            500: displayInternalError,
+        }
     })
 }

@@ -1,6 +1,7 @@
 package emf.haymoz.gatewayapi.service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import emf.haymoz.gatewayapi.model.HttpData;
 import emf.haymoz.gatewayapi.model.Livre;
 import emf.haymoz.gatewayapi.model.Reservation;
@@ -18,7 +19,7 @@ public class ReservationService {
     private static final String URL = "http://clapassonn.emf-informatique.ch/javaLivreREST/bibliotheque/reservations";
 
     // Pour serialiser des objets Java en JSON
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().setDateFormat("MM-dd-yyyy").create();
 
 
     public HttpData getReservations() {

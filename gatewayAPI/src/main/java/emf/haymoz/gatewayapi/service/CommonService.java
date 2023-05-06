@@ -28,7 +28,6 @@ public class CommonService {
                 os.flush();
                 os.close();
                 httpCode = conn.getResponseCode();
-                System.out.println();
             }
             // Envoie des données POST - FIN
 
